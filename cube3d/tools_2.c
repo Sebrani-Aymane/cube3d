@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:02:19 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/25 19:02:35 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/11/27 10:53:29 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	ft_free(char **str)
 	free(str);
 }
 
-static size_t	count_word(const char *str, char c)
+static int	count_word(const char *str, char c)
 {
-	size_t	count;
-	size_t	i;
+	int	count;
+	int	i;
 
 	count = 0;
 	i = 0;
@@ -58,18 +58,18 @@ static	int	norminet_split(char *s, int *i, char c, int *size)
 	return (2001);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_splitt(char *s, char c)
 {
 	char	**dst;
 	int		i;
-	size_t	l;
+	int	l;
 	int		size;
 
 	if (!s)
 		return (NULL);
 	l = 0;
 	i = 0;
-	dst = (char **)ft_calloc((count_word(s, c) + 1), sizeof(char *));
+	dst = (char **)malloc((count_word(s, c) + 1) * sizeof(char *));
 	if (!dst)
 		return (NULL);
 	while (l < count_word(s, c) && s[i])

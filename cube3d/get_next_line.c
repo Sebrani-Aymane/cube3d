@@ -5,21 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 19:17:30 by asebrani          #+#    #+#             */
-/*   Updated: 2023/12/26 02:22:36 by asebrani         ###   ########.fr       */
+/*   Created: 2024/11/27 11:02:33 by asebrani          #+#    #+#             */
+/*   Updated: 2024/11/27 11:04:43 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+
+#include "cube3d.h"
 
 char	*ft_read_function(int fd, char *save)
 {
 	char		*buffer;
-	ssize_t		nb;
+	int		nb;
 
 	if (!save)
 		save = ft_calloc(1, 1);
-	buffer = malloc((size_t)BUFFER_SIZE + 1);
+	buffer = malloc((int)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	nb = 1;

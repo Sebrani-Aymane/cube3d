@@ -6,13 +6,13 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 19:18:51 by asebrani          #+#    #+#             */
-/*   Updated: 2023/12/26 02:26:33 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:30:03 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "cube3d.h"
 
-size_t	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -63,10 +63,10 @@ char	*ft_strchr(char *string, int c )
 		return (NULL);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, int n)
 {
 	char	*str;
-	size_t	i;
+	int	i;
 
 	str = (char *)s;
 	i = 0;
@@ -77,7 +77,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(int count, int size)
 {
 	char	*res;
 
