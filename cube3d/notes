@@ -1,0 +1,14 @@
+typedef struct {
+    char *north_texture;
+    char *south_texture;
+    char *west_texture;
+    char *east_texture;
+    int floor_color[3];
+    int ceiling_color[3];
+    char map[MAX_MAP_HEIGHT][MAX_MAP_WIDTH];
+    int map_width;
+    int map_height;
+    int player_x;
+    int player_y;
+    char player_orientation;
+} SceneConfig;

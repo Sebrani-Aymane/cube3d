@@ -7,6 +7,7 @@ all: $(NAME)
 MLX_LIB = libmlx42.a
 GLFW_LIB = libglfw3.a
 FRAMEWORK =  $(MLX_LIB) $(GLFW_LIB) -O3 -g -ffast-math -Ofast -framework Cocoa -framework OpenGL -framework IOKit -lglfw3
+
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(FRAMEWORK) $(OBJS) -o $(NAME)
 
