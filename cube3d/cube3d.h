@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/28 05:38:50 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/11/29 21:40:08 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_map_textures *check_texts(char *line, t_map *map);
 
 /////////////////
 int	ft_strncmp(char *s1, char *s2, int	n);
+int ft_strcmp(char *s1, char *s2);
 int     ft_strlenn(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
