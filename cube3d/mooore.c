@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:54:43 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/29 21:39:59 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:38:43 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,13 @@ char	*ft_substr(char *s, int start, int len)
 
 int ft_strcmp(char *s1, char *s2)
 {
-    unsigned char *u1;
-    unsigned char *u2;
+    char *u1;
+    char *u2;
 
-    u1 = (unsigned char *)s1;
-    u2 = (unsigned char *)s2;
+    u1 = s1;
+    u2 = s2;
+	if(!s1 || !s2)
+		return(-1);
     while (*u1 && *u2 && *u1 == *u2)
     {
         u1++;

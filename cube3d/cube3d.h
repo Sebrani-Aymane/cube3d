@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/30 00:47:15 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:52:39 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 
 
 
+typedef struct s_map_status
+{
+    int no_found;
+    int so_found;
+    int we_found;
+    int ea_found;
+} t_map_status;
 
     
 typedef struct s_list{
@@ -48,7 +55,10 @@ typedef struct s_map{
 int parse_map_name(char *av);
 int parse_map(char *av);
 int	get_types_infos(char *line);
-//check_texts(char *line, t_map *map);
+void map_init(t_map *map);
+t_map *check_texts(char *line, t_map *map);
+int check_texture_completeness(t_map *map);
+int is_duplicate_direction(char *direction, t_map *map);
 
 /////////////////
 int	ft_strncmp(char *s1, char *s2, int	n);
