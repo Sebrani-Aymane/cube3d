@@ -1,15 +1,16 @@
-NO /Users/asebrani/Desktop/to_push/cube3d/main.c
-SO /Users/asebrani/Desktop/to_push/cube3d/check_data.c
-WE /Users/asebrani/Desktop/to_push/cube3d/get_next_line_utils.c
-EA /Users/asebrani/Desktop/to_push/cube3d/list_init.c
+
+NO /Users/asebrani/Desktop/cube/cube3d/parse.c
+SO /Users/asebrani/Desktop/cube/cube3d/parse_2.c
+WA /Users/asebrani/Desktop/cube/cube3d/map_init.c
+EA /Users/asebrani/Desktop/cube/cube3d/check_data.c
 
 F 220,100,0
 C 225,30,0
 
 1111111111111111111111111
-1000000000110000000000001
+     1000000000110000000000001
 1011000001110000000000001
-1001000000000000000000001
+1011110000000000000000001
 111111111011000001110000000000001
 100000000011000001110111111111111
 11110111111111011100000010001

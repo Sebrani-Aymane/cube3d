@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/30 12:27:34 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/03 02:31:01 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int	get_texts_infos(char *line)
 	result = (!ft_strncmp(str[0], "NO", 2) || !ft_strncmp(str[0], "WE", 2)
 			|| !ft_strncmp(str[0], "SO", 2) || !ft_strncmp(str[0], "EA", 2));
 	free(str);
-	
-	// if (result == 0)
-	// 	write(2, "Error: Invalid texture definition\n", 34);
 	return (result);
 }
 
@@ -65,46 +62,59 @@ int parse_map(char *str)
 {
 	int     fd;
 	char    *line;
-	int     counter;
+	int     counter_clr;
+	int     counter_texts;
 	t_map   *map;
+	char *after;
 
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (write(2, "Error: Memory allocation failed\n", 33), 1);
 	map_init(map);
-	counter = 0;
+	counter_clr=counter_texts = 0;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 		return (free_map(map), write(2, "Error: Couldn't open file\n", 27), 1);
-
+		map->fd = fd;
 	while ((line = get_next_line(fd)))
 	{
-		if (counter == 6)
+		after = ft_strtrim(line," \t");
+		if (!after || *after == '\n')
+			continue;
+		free(line);
+		if ((*after == '1' || *after =='0') || (counter_clr == 2 && counter_texts == 4) )
 		{
-			free(line);
+			//free(line);
 			break;
 		}
-		int res = 0;
-		res = get_texts_infos(line);
-		if (res)
+		if (get_texts_infos(after))
 		{
-			map = check_texts(line, map);
+			map = check_texts(after, map);
 			if (!map)
 			{
-				free(line);
+				//free(after);
 				return (free_map(map), close(fd), 1);
 			}
-			counter++;
+			counter_texts++;
 		}
-		else if (get_colors_infos(line))
+		else if (parse_color_line(after,map))
 		{
-			counter++;
+			counter_clr++;
 		}
+
 	}
+	int flag;
+	flag = 0;
 	if (!check_texture_completeness(map))
 	{
-		free(line);
+		free(after);
 			return (free_map(map), close(fd), 1);
+	}
+	else
+	{
+		if (*after == '1')
+			flag = 1;
+		//map->map_arrays = parse_map_strct(map,fd,after,flag);
 	}
 	return (0);
 }

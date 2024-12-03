@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:33:58 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/30 12:53:45 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:05:23 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@ void free_split_array(char **arr)
 	free(arr);
 }
 
-int is_valid_file(const char *path)
-{
-    if (access(path, R_OK) == 0)
-        return 1; 
-    switch(errno){
-        case EACCES:
-            write(2, "Error: Permission denied\n", 25);
-            break;
-        case ENOENT:
-            write(2, "Error: File does not exist\n", 27);
-            break;
-        default:
-            write(2, "Error: Cannot access file\n", 26);
-    }
-    return 0;
-}
 
 t_map *check_texts(char *line, t_map *map)
 {

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:54:43 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/30 11:38:43 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/02 04:16:42 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,23 @@ int ft_strcmp(char *s1, char *s2)
         u2++;
     }
     return (*u1 - *u2);
+}
+int ft_strlcpy(char *dst, const char *src, int dstsize)
+{
+    int srclen;
+    int i;
+
+    srclen = 0;
+    while (src[srclen] != '\0')
+        srclen++;
+    if (dstsize == 0)
+        return (srclen);
+    i = 0;
+    while (i < dstsize - 1 && src[i] != '\0')
+    {
+        dst[i] = src[i];
+        i++;
+    }
+    dst[i] = '\0';
+    return (srclen);
 }
