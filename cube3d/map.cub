@@ -1,12 +1,10 @@
-
 NO /Users/asebrani/Desktop/cube/cube3d/parse.c
 SO /Users/asebrani/Desktop/cube/cube3d/parse_2.c
-WA /Users/asebrani/Desktop/cube/cube3d/map_init.c
+WE /Users/asebrani/Desktop/cube/cube3d/map_init.c
 EA /Users/asebrani/Desktop/cube/cube3d/check_data.c
 
 F 220,100,0
 C 225,30,0
-
 1111111111111111111111111
      1000000000110000000000001
 1011000001110000000000001

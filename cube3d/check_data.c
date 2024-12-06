@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/02 08:52:40 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/06 22:32:03 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int is_valid_file(char *path)
 	char *str;
 	str = ft_strtrim(path,"\n");
 	
-    if (access(str, F_OK|R_OK) == 0)
+    if (access(str, F_OK| R_OK) == 0)
         return 1; 
     return 0;
 }

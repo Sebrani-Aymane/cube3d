@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:33:58 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/02 05:05:23 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/06 22:32:43 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_map *check_texts(char *line, t_map *map)
 	free(line);
 	if (!is_valid_file(str[1]))
 	{
-		write(2, "Error: Cannot access texture file\n", 35);
+		write(2, "Error: Cannot access/locate texture file\n", 41);
 		free_split_array(str);
 		return (NULL);
 	}

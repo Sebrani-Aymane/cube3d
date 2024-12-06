@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/03 02:11:26 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/06 22:42:22 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int check_texture_completeness(t_map *map);
 int is_valid_file(char *path);
 int is_duplicate_direction(char *direction, t_map *map);
 int	parse_color_line(char *line,t_map *map);
-char **parse_map_strct(t_map *map, int fd,char *line,int flag);
+char **parse_map_strct(t_map *map, int fd,char *line);
 /////////////////
 int	ft_strncmp(char *s1, char *s2, int	n);
 int ft_strcmp(char *s1, char *s2);

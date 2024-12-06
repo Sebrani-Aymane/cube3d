@@ -1,6 +1,6 @@
 CC = cc
 FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-SRCS = main.c parse.c check_data.c map_init.c parse_2.c mooore.c tools_2.c tools.c get_next_line.c get_next_line_utils.c
+SRCS = main.c parse.c check_data.c map_init.c parse_2.c mooore.c tools_2.c tools.c get_next_line.c get_next_line_utils.c parse_map.c
 OBJS = $(SRCS:.c=.o)
 NAME = cube3d
 all: $(NAME)
