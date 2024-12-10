@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/06 23:04:52 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:32:28 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_double_lines(char *str)
 	return (0);
 }
 
-char **parse_map_strct(t_map *map, int fd,char *line)
+int parse_map_strct(t_map *map, int fd,char *line)
 {
     char **map_grid;
     int i;
@@ -35,7 +35,6 @@ char **parse_map_strct(t_map *map, int fd,char *line)
     char	*temp;
 	char	*join;
     i = j = 0;
-	(void)map;
 	temp = NULL;
 	join = ft_strdup("");
 	if (*line == '1' || *line == '0')
@@ -43,7 +42,7 @@ char **parse_map_strct(t_map *map, int fd,char *line)
 	else 
 		temp = get_next_line(fd);
 	if (!temp)
-		return(write(2,"Error map!\n",12), close(fd),NULL);
+		return(write(2, "Error map!\n", 12),close(fd) ,0);
 	while (temp)
 	{
 		join = ft_strjoin(join, temp);
@@ -51,8 +50,31 @@ char **parse_map_strct(t_map *map, int fd,char *line)
 		temp = get_next_line(fd);
 	}
 	if (check_double_lines(join))
-		return (free(join), NULL);
+		return (free(join) , 0);
 	map_grid = ft_splitt(join, '\n');
 	free(join);
-	return (map_grid);
+	map->mp_arrs = map_grid;
+	return 1;
+}
+
+int parse_map_grid(t_map *map)
+{
+	int i;
+	int j;
+	i = 0;
+	check_set_chars(map->mp_arrs[0], '1');
+
+	while (map->mp_arrs[i])
+	{
+		j = 0;
+		while (map->mp_arrs[i][j])
+		{
+			if (map->mp_arrs[i][j] == '0')
+				if (!check_for_surrounds(i, j, map->mp_arrs))
+					return (0);
+			j++;
+		}
+		i++;
+	}
+	return(1);
 }

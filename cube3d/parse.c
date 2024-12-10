@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/06 23:07:10 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:20:50 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ void	free_map(t_map *map)
 		free(map);
 }
 
-int parse_map(char *str)
+int parse_map(char *str,t_map *map)
 {
 	int     fd;
 	char    *line;
 	int     counter_clr;
 	int     counter_texts;
-	t_map   *map;
 	char *after;
 
-	map = malloc(sizeof(t_map));
+	
+	map = map_init();
 	if (!map)
-		return (write(2, "Error: Memory allocation failed\n", 33), 1);
-	map_init(map);
+		return 1;
 	counter_clr=counter_texts = 0;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
@@ -81,8 +80,9 @@ int parse_map(char *str)
 		after = ft_strtrim(line," \t");
 		if (!after || *after == '\n')
 			continue;
-		free(line);
-		if ((*after == '1' || *after =='0') || (counter_clr == 2 && counter_texts == 4) )
+//		free(line);
+		if ((*after == '1' || *after =='0')
+			|| (counter_clr == 2 && counter_texts == 4))
 		{
 			//free(line);
 			break;
@@ -99,16 +99,15 @@ int parse_map(char *str)
 		}
 		else if (parse_color_line(after,map))
 			counter_clr++;
-
 	}
 	if (!check_texture_completeness(map))
 	{
-		free(after);
+	//	free(after);
 			return (free_map(map), close(fd), 1);
 	}
-	else
-		map->map_arrays = parse_map_strct(map,fd,after);
-	if (!map->map_arrays)
-		return(1);
-	return (0);
+	if (!parse_map_strct(map,fd,line))
+		return 1;
+	if (!find_player(map))
+		return(write(2, "Invalid starting pos\n", 21),1);
+	return (validate_map(map));
 }

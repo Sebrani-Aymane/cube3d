@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/06 22:42:22 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:30:41 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ typedef struct s_map_status
 typedef struct s_list
 {
     char *line;
+    
+} t_list;
+typedef struct s_map{
     int x_player_pos;
     int y_player_pos;
     char start_direction;
-} t_list;
-typedef struct s_map{
     char *no_texts;
     char *so_texts;
     char *we_texts;
@@ -50,20 +51,26 @@ typedef struct s_map{
     int floor_clr[3];
     int ceiling_clr[3];
     int             fd;
-    char **map_arrays;
+    char **mp_arrs;
+    
     t_list *map_list;
 }   t_map;
 
+//if u would want some structure add and seperate textu frome ...
+
 int parse_map_name(char *av);
-int parse_map(char *av);
+int parse_map(char *av, t_map *map);
 int	get_types_infos(char *line);
-void map_init(t_map *map);
+t_map *map_init(void);
 t_map *check_texts(char *line, t_map *map);
 int check_texture_completeness(t_map *map);
 int is_valid_file(char *path);
 int is_duplicate_direction(char *direction, t_map *map);
 int	parse_color_line(char *line,t_map *map);
-char **parse_map_strct(t_map *map, int fd,char *line);
+int parse_map_strct(t_map *map, int fd,char *line);
+int find_player(t_map *map);
+int validate_map(t_map *map);
+int parse_map_grid(t_map *map);
 /////////////////
 int	ft_strncmp(char *s1, char *s2, int	n);
 int ft_strcmp(char *s1, char *s2);
@@ -72,7 +79,9 @@ char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
 void free_split_array(char **arr);
 char	**ft_splitt(char *s, char c);
+int check_set_chars(char *str, char c);
 char *ft_del_space(char *str);
+int check_for_surrounds(int i,int j, char **map);
 /////////////////
 int	ft_strlen(char *str);
 char	*ft_strjoin(char *s1, char *s2);

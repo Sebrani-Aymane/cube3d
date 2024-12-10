@@ -6,14 +6,19 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/02 09:01:31 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:39:00 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void map_init(t_map *map)
+t_map *map_init(void)
 {
+	t_map *map;
+	
+	map = malloc(sizeof(t_map));
+	if (!map)
+		return (write(2, "Error: Memory allocation failed\n", 33), NULL);
 	map->ceiling_clr[0] = -1;
 	map->ceiling_clr[1] = -1;
 	map->ceiling_clr[2] = -1;
@@ -24,7 +29,7 @@ void map_init(t_map *map)
 	map->so_texts = NULL;
 	map->we_texts = NULL;
 	map->ea_texts = NULL;
-	return;
+	return (map);
 }
 int check_texture_completeness(t_map *map)
 {
@@ -64,4 +69,17 @@ int is_duplicate_direction(char *direction, t_map *map)
 	if (ft_strcmp(direction, "EA") == 0 && map->ea_texts)
 		return (write(2, "Error: Duplicate EA texture\n", 27), 1);
 	return 0;
+}
+int check_set_chars(char *str, char c)
+{
+	int i = 0;
+	if (!str || !*str)
+		return 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != c || str[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
 }
