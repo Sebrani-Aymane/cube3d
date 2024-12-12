@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/10 15:20:50 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:55:10 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	free_map(t_map *map)
 		free(map);
 }
 
-int parse_map(char *str,t_map *map)
+int parse_map(char *str,t_map **map)
 {
 	int     fd;
 	char    *line;
@@ -67,14 +67,14 @@ int parse_map(char *str,t_map *map)
 	char *after;
 
 	
-	map = map_init();
-	if (!map)
+	*map = map_init();
+	if (!*map)
 		return 1;
 	counter_clr=counter_texts = 0;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-		return (free_map(map), write(2, "Error: Couldn't open file\n", 27), 1);
-		map->fd = fd;
+		return (free_map(*map), write(2, "Error: Couldn't open file\n", 27), 1);
+		(*map)->fd = fd;
 	while ((line = get_next_line(fd)))
 	{
 		after = ft_strtrim(line," \t");
@@ -89,25 +89,25 @@ int parse_map(char *str,t_map *map)
 		}
 		if (get_texts_infos(after))
 		{
-			map = check_texts(after, map);
-			if (!map)
+			*map = check_texts(after, *map);
+			if (!*map)
 			{
 				//free(after);
-				return (free_map(map), close(fd), 1);
+				return (free_map(*map), close(fd), 1);
 			}
 			counter_texts++;
 		}
-		else if (parse_color_line(after,map))
+		else if (parse_color_line(after,*map))
 			counter_clr++;
 	}
-	if (!check_texture_completeness(map))
+	if (!check_texture_completeness(*map))
 	{
 	//	free(after);
-			return (free_map(map), close(fd), 1);
+			return (free_map(*map), close(fd), 1);
 	}
-	if (!parse_map_strct(map,fd,line))
+	if (!parse_map_strct(*map,fd,line))
 		return 1;
-	if (!find_player(map))
+	if (!find_player(*map))
 		return(write(2, "Invalid starting pos\n", 21),1);
-	return (validate_map(map));
+	return (validate_map(*map));
 }

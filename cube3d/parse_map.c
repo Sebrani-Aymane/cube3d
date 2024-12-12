@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/10 15:32:28 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/12 05:30:27 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int parse_map_grid(t_map *map)
 	check_set_chars(map->mp_arrs[0], '1');
 
 	while (map->mp_arrs[i])
-	{
+	{	
 		j = 0;
 		while (map->mp_arrs[i][j])
 		{

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/10 15:39:00 by asebrani         ###   ########.fr       */
+/*   Updated: 2024/12/11 20:51:49 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_map *map_init(void)
 	map->so_texts = NULL;
 	map->we_texts = NULL;
 	map->ea_texts = NULL;
+	map->mp_arrs = NULL;
 	return (map);
 }
 int check_texture_completeness(t_map *map)
