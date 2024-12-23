@@ -14,9 +14,10 @@
 
 int	main(int ac, char **av)
 {
-
+	t_mlx *mlx;
 	t_map *map;
 
+	mlx = NULL;
 	map = NULL;
 	if (ac != 2 || !av[1])
 		return (write(2,"Invalid arguments\n", 18), 0);
@@ -27,6 +28,13 @@ int	main(int ac, char **av)
 	create_new_map(&map);
 	parse_map_grid(map);
 	map ->mp_arrs = replace_spaces_with_one(map->mp_arrs);
+	mlx = malloc(sizeof(t_mlx));
+    if (!mlx)
+    {
+        write(2, "Memory allocation failed\n", 24);
+        return (0);
+    }
 	printer(map ->mp_arrs );
+	map_tracing(map, mlx);
 	return(printf("all good\n"), 1);
 }

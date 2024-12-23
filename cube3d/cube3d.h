@@ -22,6 +22,8 @@
 #include <string.h> 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
+#  define HEIGHT 720
+#  define WIDTH 1080
 # endif
 
 
@@ -57,8 +59,21 @@ typedef struct s_map{
 }   t_map;
 
 //if u would want some structure add and seperate textu frome ...
-void printer(char **str);
 
+/////////////////Tracing struc
+typedef struct s_mlx
+{
+    void    *mlx;
+    void    *win;
+    void    *img;
+    char    *addr;
+    int		bits_per_pixel;
+	int		line_lentgh;
+	int		endian;
+} t_mlx;
+
+
+void printer(char **str);
 
 
 int parse_map_name(char *av);
@@ -97,5 +112,8 @@ void	*ft_calloc(int count, int size);
 char *ft_strchrr(char *s, int c);
 char	*get_next_line(int fd);
 int ft_strlcpy(char *dst, const char *src, int dstsize);
+
+///////////////Tracing
+void    map_tracing(t_map *map, t_mlx *mlx);
 
 #endif

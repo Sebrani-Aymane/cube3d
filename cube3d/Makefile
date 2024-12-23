@@ -1,15 +1,34 @@
 CC = cc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-SRCS = main.c parse.c check_data.c map_init.c  extra_sauce.c parse_2.c parse_map2.c mooore.c tools_2.c tools.c get_next_line.c get_next_line_utils.c parse_map.c
+
+FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+
+SRCS = main.c \
+       tracing.c \
+	 parse.c \
+	 check_data.c \
+	 map_init.c \
+	 extra_sauce.c \
+	 parse_2.c \
+	 parse_map2.c \
+	 mooore.c \
+	 tools_2.c \
+	 tools.c \
+	 get_next_line.c \
+	 get_next_line_utils.c \
+	 parse_map.c \
+
 OBJS = $(SRCS:.c=.o)
+
 NAME = cube3d
+
 all: $(NAME)
+
 MLX_LIB = libmlx42.a
 GLFW_LIB = libglfw3.a
-FRAMEWORK =  $(MLX_LIB) $(GLFW_LIB) -O3 -g -ffast-math -Ofast -framework Cocoa -framework OpenGL -framework IOKit -lglfw3
+#FRAMEWORK =  $(MLX_LIB) $(GLFW_LIB) -O3 -g -ffast-math -Ofast -framework Cocoa -framework OpenGL -framework IOKit -lglfw3
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) $(FRAMEWORK) $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c cube3d.h 
 	$(CC) $(FLAGS) -c $< -o $@

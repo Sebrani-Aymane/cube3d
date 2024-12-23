@@ -1,6 +1,5 @@
-fill the shorter lines 
-check for starting position o save it 
-check if every 0 is surrundded by shit besides spaces
-fill spaces with 0
-converts map to a linked list for easier access
-have fun
+hooks ...
+draw the player and the POV ...
+draw 2d  done
+render walls 
+
