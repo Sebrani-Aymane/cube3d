@@ -3,19 +3,21 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 SRCS = main.c \
-       tracing.c \
-	 parse.c \
-	 check_data.c \
-	 map_init.c \
-	 extra_sauce.c \
-	 parse_2.c \
-	 parse_map2.c \
-	 mooore.c \
-	 tools_2.c \
-	 tools.c \
-	 get_next_line.c \
-	 get_next_line_utils.c \
-	 parse_map.c \
+		parse.c \
+		check_data.c \
+		map_init.c \
+		extra_sauce.c \
+		parse_2.c \
+		parse_map2.c \
+		mooore.c \
+		tools_2.c \
+		tools.c \
+		get_next_line.c \
+		get_next_line_utils.c \
+		parse_map.c \
+    	tracing.c \
+		tractools.c \
+		pov.c \
 
 OBJS = $(SRCS:.c=.o)
 

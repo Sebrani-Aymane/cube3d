@@ -19,13 +19,13 @@
 #include <stdlib.h>
 #include "mlx.h"
 # include <limits.h>
+#include <math.h>
 #include <string.h> 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 #  define HEIGHT 720
 #  define WIDTH 1080
 # endif
-
 
 
 typedef struct s_map_status
@@ -60,7 +60,7 @@ typedef struct s_map{
 
 //if u would want some structure add and seperate textu frome ...
 
-/////////////////Tracing struc
+/////////////////Tracing struct 
 typedef struct s_mlx
 {
     void    *mlx;
@@ -70,8 +70,11 @@ typedef struct s_mlx
     int		bits_per_pixel;
 	int		line_lentgh;
 	int		endian;
+    int     range_ho_size;
+    int     range_ve_size;
+    int     player_x;
+    int     player_y;
 } t_mlx;
-
 
 void printer(char **str);
 
@@ -113,7 +116,23 @@ char *ft_strchrr(char *s, int c);
 char	*get_next_line(int fd);
 int ft_strlcpy(char *dst, const char *src, int dstsize);
 
-///////////////Tracing
-void    map_tracing(t_map *map, t_mlx *mlx);
+///////////////Tracing function
+
+void	map_tracing(t_map *map, t_mlx *mlx);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	draw2d(t_map *map, t_mlx *mlx);
+void	draw_grid(t_mlx *mlx, int cell_width, int cell_height);
+void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color);
+void	draw_player(t_mlx *mlx, int x, int y);
+void	draw_line_dda(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
+void	draw_line_pixels(t_mlx *mlx, float x0, float y0, float x1, float y1, int steps, int color);
+void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y_end);
+void	draw_pov(t_map *map, t_mlx *mlx);
+void	draw_pixel(t_mlx *mlx, float x, float y, int color);
+int		ft_strlen2d(char **str);
+int		handle_keys(int keycode, t_mlx *mlx);
+int		close_wind(t_mlx *mlx);
+int		calculate_steps(int x0, int y0, int x1, int y1);
+
 
 #endif

@@ -34,7 +34,7 @@ int	main(int ac, char **av)
         write(2, "Memory allocation failed\n", 24);
         return (0);
     }
-	printer(map ->mp_arrs );
+	// printer(map ->mp_arrs);
 	map_tracing(map, mlx);
 	return(printf("all good\n"), 1);
 }
