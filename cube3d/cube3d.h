@@ -42,6 +42,7 @@ typedef struct s_list
     char *line;
     
 } t_list;
+
 typedef struct s_map{
     int x_player_pos;
     int y_player_pos;
@@ -60,24 +61,41 @@ typedef struct s_map{
 
 //if u would want some structure add and seperate textu frome ...
 
-/////////////////Tracing struct 
+/////////////////Tracing struct  
+
+typedef struct s_keys {
+    int w_pressed;
+    int s_pressed;
+    int a_pressed;
+    int d_pressed;
+    int left_pressed;
+    int right_pressed;
+} t_keys;
+
 typedef struct s_mlx
 {
     void    *mlx;
     void    *win;
     void    *img;
     char    *addr;
-    int		bits_per_pixel;
-	int		line_lentgh;
-	int		endian;
+    int     bits_per_pixel;
+    int     line_lentgh;
+    int     endian;
     int     range_ho_size;
     int     range_ve_size;
     int     player_x;
     int     player_y;
+    double  player_angle;
+    double  move_speed;
+    double  rotation_speed;
+    int flag;
+    t_map   *map;          
+    t_keys keys;  
 } t_mlx;
 
-void printer(char **str);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void printer(char **str);
 
 int parse_map_name(char *av);
 int parse_map(char *av, t_map **map);
@@ -93,7 +111,7 @@ int find_player(t_map *map);
 int validate_map(t_map *map);
 int parse_map_grid(t_map *map);
 void create_new_map(t_map **map);
-/////////////////
+////////////////////////////////////////////
 int	ft_strncmp(char *s1, char *s2, int	n);
 int ft_strcmp(char *s1, char *s2);
 int     ft_strlenn(char *str);
@@ -118,21 +136,25 @@ int ft_strlcpy(char *dst, const char *src, int dstsize);
 
 ///////////////Tracing function
 
-void	map_tracing(t_map *map, t_mlx *mlx);
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void	draw2d(t_map *map, t_mlx *mlx);
-void	draw_grid(t_mlx *mlx, int cell_width, int cell_height);
-void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color);
-void	draw_player(t_mlx *mlx, int x, int y);
-void	draw_line_dda(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
-void	draw_line_pixels(t_mlx *mlx, float x0, float y0, float x1, float y1, int steps, int color);
-void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y_end);
+void	init_player(t_mlx *mlx, t_map *map);
+void	render_frame(t_mlx *mlx);
+void	move_player(t_mlx *mlx, int forward);
+void	rotate_player(t_mlx *mlx, int clockwise);
 void	draw_pov(t_map *map, t_mlx *mlx);
-void	draw_pixel(t_mlx *mlx, float x, float y, int color);
-int		ft_strlen2d(char **str);
-int		handle_keys(int keycode, t_mlx *mlx);
-int		close_wind(t_mlx *mlx);
-int		calculate_steps(int x0, int y0, int x1, int y1);
-
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color);
+void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y_end);
+void	draw_line_dda(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
+void	map_tracing(t_map *map, t_mlx *mlx);
+void	initialize_mlx(t_mlx *mlx);
+int	close_wind(t_mlx *mlx);
+int	is_valid_position(t_mlx *mlx, int new_x, int new_y);
+int	key_press(int keycode, t_mlx *mlx);
+int	key_release(int keycode, t_mlx *mlx);
+int	game_loop(t_mlx *mlx);
+int	ft_strlen2d(char **str);
+int	key_press(int keycode, t_mlx *mlx);
+int	key_release(int keycode, t_mlx *mlx);
+int	game_loop(t_mlx *mlx);
 
 #endif

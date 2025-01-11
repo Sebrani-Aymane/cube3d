@@ -18,6 +18,8 @@ SRCS = main.c \
     	tracing.c \
 		tractools.c \
 		pov.c \
+		recastinit.c \
+		keys_control.c \
 
 OBJS = $(SRCS:.c=.o)
 

@@ -1,5 +1,5 @@
-hooks done (for know)
-draw 2d  done
+hooks done(left and right arrow to move the POV) (A ==> go left) (D ==> go right) (W ==> go up) (A ==> go back)
+draw 2d done
 draw the player done
-draw the POV ...
-render walls 
+draw the POV done
+render walls still.... ghada flil tkon wajda

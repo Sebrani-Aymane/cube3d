@@ -22,17 +22,6 @@ int	ft_strlen2d(char **str)
 	return(i);
 }
 
-int handle_keys(int keycode, t_mlx *mlx)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->win);
-		exit(0);
-	}
-	return 0;
-
-}
-
 int	close_wind(t_mlx *mlx)
 {
 	

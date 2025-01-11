@@ -69,17 +69,49 @@ void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y
     *y_end = mlx->player_y + (int)(length * sin(angle));
 }
 
-void	draw_pov(t_map *map, t_mlx *mlx)
+void check_wall_collision(t_map *map, t_mlx *mlx, double start_x, double start_y, double angle, 
+                         double *collision_x, double *collision_y)
 {
-    (void)map;
+    double ray_x = start_x;
+    double ray_y = start_y;
+    double dx = cos(angle);
+    double dy = sin(angle);
+    double step = 1.0;
 
-	int x_end_left, y_end_left;
-	int x_end_right, y_end_right;
-	int length = 100;
-	double player_angle = 3 * M_PI / 2;
+    while (1)
+    {
+        int map_x = (int)(ray_x / mlx->range_ho_size);
+        int map_y = (int)(ray_y / mlx->range_ve_size);
 
-	calculate_endpoint(mlx, length, player_angle - M_PI / 6, &x_end_left, &y_end_left);
-	calculate_endpoint(mlx, length, player_angle + M_PI / 6, &x_end_right, &y_end_right);
-	draw_line_dda(mlx, mlx->player_x, mlx->player_y, x_end_left, y_end_left, 0xFF0000);
-	draw_line_dda(mlx, mlx->player_x, mlx->player_y, x_end_right, y_end_right, 0xFF0000);
+        if (map_x < 0 || map_x >= WIDTH || map_y < 0 || map_y >= HEIGHT)
+            break;
+        if (map->mp_arrs[map_y][map_x] == '1')
+            break;
+        ray_x += dx * step;
+        ray_y += dy * step;
+    }
+
+    *collision_x = ray_x;
+    *collision_y = ray_y;
+}
+
+void draw_pov(t_map *map, t_mlx *mlx)
+{
+    double fov = M_PI / 3;
+    int num_rays = 60;
+    double angle_step = fov / (num_rays - 1);
+    double start_angle = mlx->player_angle - fov/2;
+    int i = 0;
+    double collision_x, collision_y;
+    double current_angle;
+
+    while (i < num_rays)
+    {
+        current_angle = start_angle + (i * angle_step);
+        check_wall_collision(map, mlx, mlx->player_x, mlx->player_y, 
+                           current_angle, &collision_x, &collision_y);
+        draw_line_dda(mlx, mlx->player_x, mlx->player_y, 
+                     (int)collision_x, (int)collision_y, 0x550000);
+        i++;
+    }
 }
