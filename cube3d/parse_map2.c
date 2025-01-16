@@ -79,6 +79,7 @@ int validate_map(t_map *map)
 
 	return (0);
 }
+
 int count_map_rows(char **map)
 {
     int rows;

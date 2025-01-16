@@ -12,6 +12,45 @@
 
 #include "cube3d.h"
 
+int is_valid_position(t_mlx *mlx, int new_x, int new_y)
+{
+    int map_x = new_x / mlx->range_ho_size;
+    int map_y = new_y / mlx->range_ve_size;
+    
+    if (map_x < 0 || map_y < 0 || map_y >= ft_strlen2d(mlx->map->mp_arrs) || 
+        map_x >= ft_strlen(mlx->map->mp_arrs[map_y]))
+        return 0;
+        
+    return (mlx->map->mp_arrs[map_y][map_x] != '1');
+}
+
+
+void move_player(t_mlx *mlx, int forward)
+{
+	double move_angle = mlx->player_angle;
+	double move_speed = mlx->move_speed;
+	int new_x, new_y;
+
+   if (!forward)
+   {
+        move_angle += M_PI;
+        move_speed = move_speed * 0.8;
+	}
+    double dx = cos(move_angle) * move_speed;
+    double dy = sin(move_angle) * move_speed;
+
+    new_x = mlx->player_x + (int)dx;
+    new_y = mlx->player_y + (int)dy;
+
+   
+    if (is_valid_position(mlx, new_x, mlx->player_y))
+        mlx->player_x = new_x;
+    if (is_valid_position(mlx, mlx->player_x, new_y))
+        mlx->player_y = new_y;
+    
+    render_frame(mlx);
+}
+
 void strafe_player(t_mlx *mlx, int right)
 {
 	double strafe_angle;
@@ -76,6 +115,20 @@ int key_release(int keycode, t_mlx *mlx)
     return (0);
 }
 
+void rotate_player(t_mlx *mlx, int clockwise)
+{
+    if (clockwise)
+        mlx->player_angle += mlx->rotation_speed;
+    else
+        mlx->player_angle -= mlx->rotation_speed;
+        
+    mlx->player_angle = fmod(mlx->player_angle, 2 * M_PI);
+    if (mlx->player_angle < 0)
+        mlx->player_angle += 2 * M_PI;
+        
+    render_frame(mlx);
+}
+
 int game_loop(t_mlx *mlx)
 {
 	if (mlx->keys.w_pressed)
@@ -91,4 +144,12 @@ int game_loop(t_mlx *mlx)
 	if (mlx->keys.d_pressed)
 		strafe_player(mlx, 1);
 	return (0);
+}
+
+void    setup_hooks(t_mlx *mlx)
+{
+	mlx_hook(mlx->win, 2, 1L<<0, key_press, mlx);
+	mlx_hook(mlx->win, 3, 1L<<1, key_release, mlx);
+	mlx_hook(mlx->win, 17, 0, close_wind, mlx);
+	mlx_loop_hook(mlx->mlx, game_loop, mlx);
 }

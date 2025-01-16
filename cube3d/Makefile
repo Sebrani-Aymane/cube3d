@@ -20,6 +20,10 @@ SRCS = main.c \
 		pov.c \
 		recastinit.c \
 		keys_control.c \
+		draw.c \
+		cast.c \
+		cast2.c \
+
 
 OBJS = $(SRCS:.c=.o)
 

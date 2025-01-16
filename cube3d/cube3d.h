@@ -21,10 +21,13 @@
 # include <limits.h>
 #include <math.h>
 #include <string.h> 
+#include <float.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 #  define HEIGHT 720
 #  define WIDTH 1080
+#  define FOV_ANGLE M_PI / 3
+#  define NUM_RAYS WIDTH
 # endif
 
 
@@ -61,9 +64,10 @@ typedef struct s_map{
 
 //if u would want some structure add and seperate textu frome ...
 
-/////////////////Tracing struct  
+/////////////////Tracing structs
 
-typedef struct s_keys {
+typedef struct s_keys
+{
     int w_pressed;
     int s_pressed;
     int a_pressed;
@@ -72,27 +76,43 @@ typedef struct s_keys {
     int right_pressed;
 } t_keys;
 
+typedef struct s_rays
+{
+    float distance;
+    float ray_angle;
+    float wallhitx;
+    float wallhity;
+    int hit_ver;
+    int facing_up;
+    int facing_down;
+    int facing_left;
+    int facing_right;
+    float intarsec_x;
+    float intersec_y;
+
+} t_rays;
+
 typedef struct s_mlx
 {
-    void    *mlx;
-    void    *win;
-    void    *img;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_lentgh;
-    int     endian;
-    int     range_ho_size;
-    int     range_ve_size;
-    int     player_x;
-    int     player_y;
-    double  player_angle;
-    double  move_speed;
-    double  rotation_speed;
+    void *mlx;
+    void *win;
+    void *img;
+    char *addr;
+    int bits_per_pixel;
+    int line_lentgh;
+    int endian;
+    int range_ho_size;
+    int range_ve_size;
+    int player_x;
+    int player_y;
+    double player_angle;
+    double move_speed;
+    double rotation_speed;
     int flag;
-    t_map   *map;          
+    t_map *map;          
     t_keys keys;  
+    t_rays rays[NUM_RAYS];
 } t_mlx;
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void printer(char **str);
@@ -140,13 +160,23 @@ void	init_player(t_mlx *mlx, t_map *map);
 void	render_frame(t_mlx *mlx);
 void	move_player(t_mlx *mlx, int forward);
 void	rotate_player(t_mlx *mlx, int clockwise);
-void	draw_pov(t_map *map, t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	draw_pov(t_map *map, t_mlx *mlx);
 void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color);
+void	draw_grid(t_mlx *mlx, int cell_width, int cell_height);
+void	draw2d(t_map *map, t_mlx *mlx);
 void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y_end);
 void	draw_line_dda(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
 void	map_tracing(t_map *map, t_mlx *mlx);
+void initialize_ray(t_rays *ray, float ray_angle);
 void	initialize_mlx(t_mlx *mlx);
+void    setup_hooks(t_mlx *mlx);
+void find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *horz_x, float *horz_y, int *found);
+void find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *vert_x, float *vert_y, int *found);
+void	initialize_map_settings(t_map *map, t_mlx *mlx);
+void draw_walls(t_mlx *mlx);
+void cast_rays(t_mlx *mlx);
+float normal_angle(float angle);
 int	close_wind(t_mlx *mlx);
 int	is_valid_position(t_mlx *mlx, int new_x, int new_y);
 int	key_press(int keycode, t_mlx *mlx);

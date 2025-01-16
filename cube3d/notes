@@ -2,4 +2,20 @@ hooks done(left and right arrow to move the POV) (A ==> go left) (D ==> go right
 draw 2d done
 draw the player done
 draw the POV done
-render walls still.... ghada flil tkon wajda
+render walls done
+
+
+
+1 - tracing.c : Depart
+    map_tracing:
+    1--initialize_mlx:
+    Pour gerer le graphique et les fenetre.
+    2--initialize_map_settings :
+    calcule des tailles (size-hori, size-vert).
+    keys_control.c : setup_hooks: 
+    3--render_frame:
+        draw.c(---draw2d:Pour dessiner en 2d
+                --draw_grid: poure dessiner un grille avec des lignes hori et verti
+                     couvre toute la fenetre).
+    
+    to be contin..
