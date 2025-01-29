@@ -112,7 +112,7 @@ void draw_walls(t_mlx *mlx)
         int y = 0;
         while (y < wall_top)
         {
-            my_mlx_pixel_put(mlx, strip_id, y, 0x87CEEB);
+            my_mlx_pixel_put(mlx, strip_id, y, 0xff00000);
             y++;
         }
 
@@ -120,8 +120,8 @@ void draw_walls(t_mlx *mlx)
         y = wall_top;
         while (y < wall_bottom)
         {
-            my_mlx_pixel_put(mlx, strip_id, y, color);
-            y++;
+            my_mlx_pixel_put(mlx, strip_id, y, mlx->addr[1]);
+             y++;
         }
 
         y = wall_bottom;

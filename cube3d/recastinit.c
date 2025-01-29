@@ -68,6 +68,7 @@ void initialize_mlx(t_mlx *mlx)
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 						 &mlx->line_lentgh, &mlx->endian);
 	if (!mlx->addr)
+    
 	{
 		mlx_destroy_image(mlx->mlx, mlx->img);
 		mlx_destroy_window(mlx->mlx, mlx->win);

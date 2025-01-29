@@ -14,7 +14,9 @@
 
 void load_texture(void *mlx_ptr, t_texture *tex, char *path)
 {
-    tex->img = mlx_xpm_file_to_image(mlx_ptr, path, &tex->width, &tex->height);
+    tex->img = mlx_png_file_to_image(mlx_ptr, path, &tex->width, &tex->height);
     tex->addr = mlx_get_data_addr(tex->img, &tex->bits_per_pixel, 
                                  &tex->line_length, &tex->endian);
 }
+
+void texts_put(void *mlx,t_textures *tex,)

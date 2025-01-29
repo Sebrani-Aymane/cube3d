@@ -1,7 +1,7 @@
-NO /Users/kaafkhar/Desktop/cube3d/cube3d/parse_map2.c
-SO /Users/kaafkhar/Desktop/cube3d/cube3d/parse_2.c
-WE /Users/kaafkhar/Desktop/cube3d/cube3d/map_init.c
-EA /Users/kaafkhar/Desktop/cube3d/cube3d/check_data.c
+NO parse_map2.c
+SO parse_2.c
+WE map_init.c
+EA check_data.c
 
 F 220,255,0
 C 225,30,0
