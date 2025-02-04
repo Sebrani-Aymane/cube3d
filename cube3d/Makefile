@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+FLAGS =# -Wall -Wextra -Werror #-fsanitize=address -g
 
 SRCS = main.c \
 		parse.c \
@@ -23,6 +23,7 @@ SRCS = main.c \
 		draw.c \
 		cast.c \
 		cast2.c \
+		set_textures/load_texts.c\
 
 
 OBJS = $(SRCS:.c=.o)

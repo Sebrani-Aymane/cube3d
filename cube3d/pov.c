@@ -83,7 +83,7 @@ void check_wall_collision(t_map *map, t_mlx *mlx, double start_x, double start_y
         int map_x = (int)(ray_x / mlx->range_ho_size);
         int map_y = (int)(ray_y / mlx->range_ve_size);
 
-        if (map_x < 0 || map_x >= WIDTH || map_y < 0 || map_y >= HEIGHT)
+        if (map_x < 0 || map_x >= WIDTH  || map_y < 0 || map_y >= HEIGHT)
             break;
         if (map->mp_arrs[map_y][map_x] == '1')
             break;

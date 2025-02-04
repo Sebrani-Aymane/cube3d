@@ -85,6 +85,14 @@ typedef struct s_texture {
     int     width;
     int     height;
 } t_texture;
+
+typedef struct s_textures{
+    t_texture north;
+    t_texture south;
+    t_texture east;
+    t_texture west;
+}t_textures;
+
 typedef struct s_rays
 {
     float distance;
@@ -121,6 +129,7 @@ typedef struct s_mlx
     t_map *map;          
     t_keys keys;  
     t_rays rays[NUM_RAYS];
+    t_textures texs;
 } t_mlx;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -195,5 +204,11 @@ int	ft_strlen2d(char **str);
 int	key_press(int keycode, t_mlx *mlx);
 int	key_release(int keycode, t_mlx *mlx);
 int	game_loop(t_mlx *mlx);
+
+
+// set textures
+unsigned int get_texture_color(t_texture *texture, int x, int y);
+int init_texture(void *mlx, t_texture *texture, char *path);
+
 
 #endif

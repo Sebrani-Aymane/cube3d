@@ -65,8 +65,8 @@ void	draw2d(t_map *map, t_mlx *mlx)
 	int x;
 
 	y = 0;
-	mlx->range_ho_size = WIDTH / (ft_strlen(map->mp_arrs[0]));
-	mlx->range_ve_size = HEIGHT / (ft_strlen2d(map->mp_arrs));
+	mlx->range_ho_size = 64;
+	mlx->range_ve_size = 64;
 	while (map->mp_arrs[y] != NULL)
 	{
 		x = 0;
