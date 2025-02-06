@@ -6,17 +6,17 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/04 21:35:04 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/06 22:14:25 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 void set_textures(t_mlx *mlx)
 {
-	init_texture(mlx,&mlx->texs.north,"/Users/asebrani/Downloads/5a6d1b2bfc4f3b98639fa199c9c48d0d.xpm");
-	init_texture(mlx,&mlx->texs.east,"/Users/asebrani/Downloads/ff9e205686e2676692e95a62732f654c.xpm");
-	init_texture(mlx,&mlx->texs.south,"/Users/asebrani/Downloads/03ba785863e1857795cb846306370b71.xpm ");
-	init_texture(mlx,&mlx->texs.west,"/Users/asebrani/Downloads/03aabd53ed7fb373e2736d68aabca2ed.xpm");
+	init_texture(mlx,&mlx->texs.north,"/Users/asebrani/Downloads/NO.xpm");
+	init_texture(mlx,&mlx->texs.east,"/Users/asebrani/Downloads/EA.xpm");
+	init_texture(mlx,&mlx->texs.south,"/Users/asebrani/Downloads/SO.xpm");
+	init_texture(mlx,&mlx->texs.west,"/Users/asebrani/Downloads/WE.xpm");
 }
 int	main(int ac, char **av)
 {

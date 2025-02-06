@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 23:13:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/02/04 21:42:29 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/06 23:46:57 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,14 @@ void draw_walls(t_mlx *mlx)
     float wall_height;
     float perpDistance;
     int color;
+
     t_texture *texture = &mlx->texs.north;
     while (strip_id < NUM_RAYS)
     {
         double tex_x;
-        if (mlx->rays[strip_id].hit_ver)
-            tex_x = fmod(mlx->rays[strip_id].wallhity, 64);
-         else
-            tex_x = fmod(mlx->rays[strip_id].wallhitx, 64);
         if(mlx->rays[strip_id].hit_ver)
         {
+            tex_x = fmod(mlx->rays[strip_id].wallhity, 64);
             if(mlx->rays[strip_id].facing_left)
                 texture = &mlx->texs.west;
             else
@@ -133,19 +131,24 @@ void draw_walls(t_mlx *mlx)
         }
         else
         {
-            if(mlx->rays[strip_id].facing_up)
-                texture = &mlx->texs.north;
-            else
+            tex_x = fmod(mlx->rays[strip_id].wallhitx, 64);
+            if(mlx->rays[strip_id].facing_down)
                 texture = &mlx->texs.south;
+            else
+                texture = &mlx->texs.north;
         }
         tex_x = (tex_x * texture->width) / 64;
+        if(mlx->rays[strip_id].hit_ver && mlx->rays[strip_id].facing_left)
+            tex_x = texture->width - tex_x;
+        if(!mlx->rays[strip_id].hit_ver && mlx->rays[strip_id].facing_down)
+             tex_x = texture->width - tex_x;
         perpDistance = mlx->rays[strip_id].distance;
         if (perpDistance < 1) perpDistance = 1;
         wall_height = (mlx->range_ve_size * HEIGHT) / perpDistance;
-        if (wall_height > HEIGHT * 3)
-            wall_height = HEIGHT * 3;
+         if (wall_height  > HEIGHT * 4)
+             wall_height  = HEIGHT * 4;
         wall_top = (HEIGHT / 2) - (wall_height / 2);
-        wall_top = wall_top < 0 ? 0 : wall_top;
+        // wall_top = wall_top < 0 ? 0 : wall_top;
         wall_bottom = (HEIGHT / 2) + (wall_height / 2);
         wall_bottom = wall_bottom > HEIGHT ? HEIGHT : wall_bottom;
         double tex_offset = (double)texture->height / wall_height;
@@ -156,13 +159,14 @@ void draw_walls(t_mlx *mlx)
             y++;
         }
         y = wall_top;
+        
         while (y < wall_bottom)
         {
-             int tex_y = (y - wall_top) * tex_offset;
-
-            tex_y = (tex_y >= texture->height )? texture->height -1 : tex_y;
+            int tex_y = (y - wall_top) * tex_offset;
+            // tex_y = (tex_y >= texture->height )? texture->height -1 : tex_y;
             color = get_texture_color(texture,tex_x,tex_y);
-            int c = mlx->rays[strip_id].hit_ver ? 0xff0000 : 0x00ff00;
+            if(wall_height  == HEIGHT * 4)
+                color = 0;
             my_mlx_pixel_put(mlx, strip_id, y, color);
              y++;
         }
@@ -172,7 +176,7 @@ void draw_walls(t_mlx *mlx)
             my_mlx_pixel_put(mlx, strip_id, y, 0x654321);
             y++;
         }
-
         strip_id++;
     }
 }
+
