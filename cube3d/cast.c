@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 23:13:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/02/06 23:46:57 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/16 08:22:02 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void draw_walls(t_mlx *mlx)
          if (wall_height  > HEIGHT * 4)
              wall_height  = HEIGHT * 4;
         wall_top = (HEIGHT / 2) - (wall_height / 2);
-        // wall_top = wall_top < 0 ? 0 : wall_top;
+         wall_top = wall_top < 0 ? 0 : wall_top;
         wall_bottom = (HEIGHT / 2) + (wall_height / 2);
         wall_bottom = wall_bottom > HEIGHT ? HEIGHT : wall_bottom;
         double tex_offset = (double)texture->height / wall_height;
@@ -163,10 +163,11 @@ void draw_walls(t_mlx *mlx)
         while (y < wall_bottom)
         {
             int tex_y = (y - wall_top) * tex_offset;
-            // tex_y = (tex_y >= texture->height )? texture->height -1 : tex_y;
+             //tex_y = (tex_y >= texture->height )? texture->height -1 : tex_y;
             color = get_texture_color(texture,tex_x,tex_y);
             if(wall_height  == HEIGHT * 4)
                 color = 0;
+          
             my_mlx_pixel_put(mlx, strip_id, y, color);
              y++;
         }

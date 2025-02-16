@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror #  -fsanitize=address -g
+FLAGS = -Wall -Wextra -Werror   -fsanitize=address -g
 
 SRCS = main.c \
 		parse.c \

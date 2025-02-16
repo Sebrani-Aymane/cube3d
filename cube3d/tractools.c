@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tractools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-23 17:41:23 by kaafkhar          #+#    #+#             */
-/*   Updated: 2024-12-23 17:41:23 by kaafkhar         ###   ########.fr       */
+/*   Created: 2024/12/23 17:41:23 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/02/16 08:22:26 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	close_wind(t_mlx *mlx)
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
-
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+        return;
 	dst = mlx->addr + (y * mlx->line_lentgh + x * (mlx->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }

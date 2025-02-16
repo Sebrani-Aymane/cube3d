@@ -6,11 +6,12 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/06 22:14:25 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/16 08:35:31 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
 void set_textures(t_mlx *mlx)
 {
 	init_texture(mlx,&mlx->texs.north,"/Users/asebrani/Downloads/NO.xpm");
