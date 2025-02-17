@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/06 22:05:00 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:40:02 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_map{
     int ceiling_clr[3];
     int             fd;
     char **mp_arrs;
-    
     t_list *map_list;
 }   t_map;
 

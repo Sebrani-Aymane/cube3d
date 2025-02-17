@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/11 20:51:49 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 03:54:38 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int check_set_chars(char *str, char c)
 		return 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] != c || str[i] != ' ')
+		if (str[i] != c && str[i] != ' ')
 			return (0);
 		i++;
 	}

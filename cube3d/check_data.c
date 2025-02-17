@@ -6,11 +6,25 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/06 22:32:03 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 01:19:27 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+int is_only_digits(char *str)
+{
+	int i=0;
+    if (str == NULL || *str == '\0') {
+        return (0);
+    }
+    while (str[i] != '\0') 
+	{
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
+		i++;
+    }
+    return (1);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -50,7 +64,7 @@ int	validate_color_line(char *trimmed)
 	return (1);
 }
 
-char	*skip_whitespace(char *str)
+char	*skip_space(char *str)
 {
 	while (*str == ' ' || *str == '\t')
 		str++;
@@ -66,6 +80,14 @@ int	parse_color_components(char **rgb_parts, int *r, int *g, int *b)
 		part_count++;
 	if (part_count != 3)
 		return (0);
+	part_count=0;
+
+	while (part_count < 3)
+	{
+		if(!is_only_digits(rgb_parts[part_count]))
+			return(0);
+			part_count++;
+	}
 	*r = ft_atoi(rgb_parts[0]);
 	*g = ft_atoi(rgb_parts[1]);
 	*b = ft_atoi(rgb_parts[2]);
@@ -85,13 +107,13 @@ int	parse_color_line(char *line,t_map *map)
 	int		b;
 
 
-	trimmed = ft_strtrim(line, " \t");
+	trimmed = ft_strtrim(line, " \n\t");
 	if (!validate_color_line(trimmed))
 	{
 		free(trimmed);
 		return (0);
 	}
-	char *color_start = skip_whitespace(trimmed + 1);
+	char *color_start = skip_space(trimmed + 1);
 	rgb_parts = ft_splitt(color_start, ',');
 	if (!rgb_parts)
 	{
@@ -110,6 +132,7 @@ int	parse_color_line(char *line,t_map *map)
 		return (0);
 	if (line[0] == 'F')
 	{
+
 		map->floor_clr[0] = r;
 		map->floor_clr[1] = g;
 		map->floor_clr[2] = b;

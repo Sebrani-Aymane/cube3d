@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:29:46 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/06 23:00:02 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 03:29:39 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char *ft_strtrim(char  *s1, char  *set)
     if (!trimmed)
         return (NULL);
     strlcpy(trimmed, s1 + start, end - start + 1);
-
     return (trimmed);
 }
 char *ft_strchrr(char *s, int c)

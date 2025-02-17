@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:54:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/12 05:21:40 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 04:11:57 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int find_player(t_map *map)
 		j = 0;
 		while(map->mp_arrs[i][j])
 		{
-			if (map->mp_arrs[i][j] == 'N' || map->mp_arrs[i][j] == 'S' || 
-				map->mp_arrs[i][j] == 'W' || map->mp_arrs[i][j] == 'E')
+			if ((map->mp_arrs[i][j] == 'N' || map->mp_arrs[i][j] == 'S' || 
+				map->mp_arrs[i][j] == 'W' || map->mp_arrs[i][j] == 'E'))
 				count++;
 			j++;
 		}
@@ -97,10 +97,8 @@ int check_for_surrounds(int i, int j, char **map)
 {
     int map_rows;
     int row_len;
-
     if (!map || !map[i])
         return (1);
-
     map_rows = count_map_rows(map);
     row_len = ft_strlen(map[i]);
     if (j > 0 && j + 1 < row_len)
@@ -115,7 +113,6 @@ int check_for_surrounds(int i, int j, char **map)
         if (j < ft_strlen(map[i+1]) && map[i+1][j] == ' ')
             return (write(2, "0 is near a space\n", 18), 0);
     }
-
     return (1);
 }
 void create_new_map(t_map **map)
@@ -136,16 +133,11 @@ void create_new_map(t_map **map)
 		if (!temp)
 			return;
 	    temp[0] = ' ';
-	
 		ft_strlcpy(temp + 1, (*map)->mp_arrs[i], len + 1);
-	
 		temp[len + 1] = ' ';
-	
 		temp[len + 2] = '\0';
-	
 		free((*map)->mp_arrs[i]);
 		(*map)->mp_arrs[i] = temp;
-	
 		i++;
 	}
 }

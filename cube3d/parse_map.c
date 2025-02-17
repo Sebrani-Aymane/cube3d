@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/12 05:30:27 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/02/17 04:28:44 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int parse_map_strct(t_map *map, int fd,char *line)
     i = j = 0;
 	temp = NULL;
 	join = ft_strdup("");
+	if (!line || !*line)
+		return(write(2, "Error map!\n", 12),close(fd) ,0);
 	if (*line == '1' || *line == '0')
 		temp = line;
 	else 
@@ -62,8 +64,8 @@ int parse_map_grid(t_map *map)
 	int i;
 	int j;
 	i = 0;
-	check_set_chars(map->mp_arrs[0], '1');
-
+	if (!check_set_chars(map->mp_arrs[0],'1'))
+		return (write(2, "0 is near a space\n", 18), 0);
 	while (map->mp_arrs[i])
 	{	
 		j = 0;
@@ -76,5 +78,7 @@ int parse_map_grid(t_map *map)
 		}
 		i++;
 	}
+	if (!check_set_chars(map->mp_arrs[i-1], '1'))
+		return (write(2, "0 is near a space\n", 18), 0);
 	return(1);
 }
