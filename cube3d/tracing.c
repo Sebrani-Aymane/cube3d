@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tracing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-21 03:17:02 by kaafkhar          #+#    #+#             */
-/*   Updated: 2024-12-21 03:17:02 by kaafkhar         ###   ########.fr       */
+/*   Created: 2024/12/21 03:17:02 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/02/18 22:04:53 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void render_frame(t_mlx *mlx)
     cast_rays(mlx);
     draw_walls(mlx);
     my_mlx_pixel_put(mlx, mlx->player_x, mlx->player_y, 0xff0000);
-    // draw_grid(mlx, mlx->range_ho_size, mlx->range_ve_size);
-    // draw_pov(mlx->map, mlx);
+    //  draw_grid(mlx, mlx->range_ho_size, mlx->range_ve_size);
+    //  draw_pov(mlx->map, mlx);
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
 
