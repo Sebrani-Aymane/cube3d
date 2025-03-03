@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/18 22:09:45 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/03 21:28:47 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main(int ac, char **av)
 		return(write(2, "invalid map name\n", 18), 0);
 	if ( 0 != parse_map(av[1] ,&map))
 		return(0); 
-	if (!check_for_surrounds(map->x_player_pos,map->y_player_pos,map->mp_arrs))
-				return(write(2, "invalid position\n", 18), 0);
+	// if (!check_for_surrounds(map->x_player_pos,map->y_player_pos,map->mp_arrs))
+	// 			return(write(2, "invalid position\n", 18), 0);
 	create_new_map(&map);
 	if (!parse_map_grid(map))
 		return(0);

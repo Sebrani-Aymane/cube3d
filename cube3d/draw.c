@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-12 00:52:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-01-12 00:52:52 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/01/12 00:52:52 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/03 21:56:26 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,6 @@ void	draw_grid(t_mlx *mlx, int cell_width, int cell_height)
 	}
 }
 
-void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < range_ve_size)
-	{
-	j = 0;
-	while (j < range_ho_size)
-	{
-		my_mlx_pixel_put(mlx, x * range_ho_size + j, y * range_ve_size + i, color);
-		j++;
-	}
-	i++;
-	}
-}
 
 void	draw2d(t_map *map, t_mlx *mlx)
 {
@@ -67,24 +50,21 @@ void	draw2d(t_map *map, t_mlx *mlx)
 	y = 0;
 	mlx->range_ho_size = 64;
 	mlx->range_ve_size = 64;
-	while (map->mp_arrs[y] != NULL)
+	while (map->mp_arrs[y])
 	{
 		x = 0;
 		while (map->mp_arrs[y][x])
 		{
-			if (map->mp_arrs[y][x] == '1')
-				draw_tile(mlx, x, y, mlx->range_ho_size, mlx->range_ve_size, 0x000000);
-			else if (map->mp_arrs[y][x] == '0' || map->mp_arrs[y][x] == 'W' ||
+			if (map->mp_arrs[y][x] == '0' || map->mp_arrs[y][x] == 'W' ||
 					map->mp_arrs[y][x] == 'E' || map->mp_arrs[y][x] == 'S' || map->mp_arrs[y][x] == 'N')
 			{
-				draw_tile(mlx, x, y, mlx->range_ho_size, mlx->range_ve_size, 0xFFFFFF);
 				if (map->mp_arrs[y][x] == 'W' || map->mp_arrs[y][x] == 'E' ||
 					map->mp_arrs[y][x] == 'S' || map->mp_arrs[y][x] == 'N')
 					{
 						if (mlx->flag == 0)
 						{
-							mlx->player_x = x * mlx->range_ho_size + mlx->range_ho_size / 2;
-							mlx->player_y = y * mlx->range_ve_size + mlx->range_ve_size / 2;
+							mlx->player_x = x * mlx->range_ho_size / 2;
+							mlx->player_y = y * mlx->range_ve_size / 2;
 							mlx->flag = 1;
 						}
 					}
