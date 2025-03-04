@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 00:52:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/03 21:56:26 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:41:32 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_grid(t_mlx *mlx, int cell_width, int cell_height)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			my_mlx_pixel_put(mlx, x, y, 0x00FF00);
+			my_mlx_pixel_put(mlx, x, y, 0xff0000);
 			y++;
 		}
 		x += cell_width;
@@ -34,7 +34,7 @@ void	draw_grid(t_mlx *mlx, int cell_width, int cell_height)
 		x = 0;
 		while (x < WIDTH)
 		{
-			my_mlx_pixel_put(mlx, x, y, 0x00FF00);
+			my_mlx_pixel_put(mlx, x, y, 0xff0000);
 			x++;
 		}
 		y += cell_height;
@@ -63,8 +63,8 @@ void	draw2d(t_map *map, t_mlx *mlx)
 					{
 						if (mlx->flag == 0)
 						{
-							mlx->player_x = x * mlx->range_ho_size / 2;
-							mlx->player_y = y * mlx->range_ve_size / 2;
+							mlx->player_x = x * mlx->range_ho_size +  mlx->range_ho_size/ 2;
+							mlx->player_y = y * mlx->range_ve_size +  mlx->range_ve_size / 2;
 							mlx->flag = 1;
 						}
 					}

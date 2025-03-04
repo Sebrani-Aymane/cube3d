@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/17 01:40:02 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:19:13 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 #  define HEIGHT 720
-#  define WIDTH 1080
+#  define WIDTH 1200
 #  define FOV_ANGLE M_PI / 3
 #  define NUM_RAYS WIDTH
 # endif
@@ -114,6 +114,8 @@ typedef struct s_mlx
     void *win;
     void *img;
     char *addr;
+    unsigned int floor_color;
+    unsigned int ceiling_color;
     int bits_per_pixel;
     int line_lentgh;
     int endian;

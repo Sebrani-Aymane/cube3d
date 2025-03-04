@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-11 03:45:59 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-01-11 03:45:59 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/01/11 03:45:59 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/04 01:20:15 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int is_valid_position(t_mlx *mlx, int new_x, int new_y)
     int map_y = new_y / mlx->range_ve_size;
     
     if (map_x < 0 || map_y < 0 || map_y >= ft_strlen2d(mlx->map->mp_arrs) || 
-        map_x >= ft_strlen(mlx->map->mp_arrs[map_y]))
+        map_x >= ft_strlen(mlx->map->mp_arrs[0]))
         return 0;
         
     return (mlx->map->mp_arrs[map_y][map_x] != '1');

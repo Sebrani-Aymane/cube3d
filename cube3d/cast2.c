@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-16 03:47:12 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-01-16 03:47:12 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/01/16 03:47:12 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/04 02:13:26 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *horz_x
     next_x = x_intercept;
     next_y = y_intercept;
     *found = 0;
-    while (next_x >= 0 && next_x < WIDTH && next_y >= 0 && next_y < HEIGHT)
+    while (next_x >= 0 && next_x <ft_strlen(mlx->map->mp_arrs[0]) * 64 && next_y >= 0 && next_y < ft_strlen2d(mlx->map->mp_arrs) * 64)
     {
         int map_x = (int)(next_x / mlx->range_ho_size);
         int map_y;
@@ -77,7 +77,7 @@ void find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *horz_x
         }
 
         if (map_y >= 0 && map_y < ft_strlen2d(mlx->map->mp_arrs) &&
-            map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[map_y]) &&
+            map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[0]) &&
             mlx->map->mp_arrs[map_y][map_x] == '1')
         {
             *horz_x = next_x;
@@ -121,8 +121,8 @@ void find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *vert_x, 
     }
     next_x = x_intercept;
     next_y = y_intercept;
-    *found = 0;
-    while (next_x >= 0 && next_x < WIDTH && next_y >= 0 && next_y < HEIGHT)
+    *found = 0; 
+    while (next_x >= 0 && next_x < ft_strlen(mlx->map->mp_arrs[0]) * 64 && next_y >= 0 && next_y < ft_strlen2d(mlx->map->mp_arrs) * 64)
     {
         int map_x;
 
@@ -136,9 +136,8 @@ void find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *vert_x, 
         }
 
         int map_y = (int)(next_y / mlx->range_ve_size);
-
         if (map_y >= 0 && map_y < ft_strlen2d(mlx->map->mp_arrs) &&
-            map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[map_y]) &&
+            map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[0]) &&
             mlx->map->mp_arrs[map_y][map_x] == '1')
         {
             *vert_x = next_x;

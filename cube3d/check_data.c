@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/17 01:19:27 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:28:19 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int	parse_color_line(char *line,t_map *map)
 		return (0);
 	if (line[0] == 'F')
 	{
-
 		map->floor_clr[0] = r;
 		map->floor_clr[1] = g;
 		map->floor_clr[2] = b;

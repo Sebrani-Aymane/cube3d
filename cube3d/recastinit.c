@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recastinit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-11 03:38:39 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-01-11 03:38:39 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/01/11 03:38:39 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/04 02:01:50 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void init_player(t_mlx *mlx, t_map *map)
 
 void	initialize_map_settings(t_map *map, t_mlx *mlx)
 {
-	mlx->range_ho_size = WIDTH / ft_strlen(map->mp_arrs[0]);
-	mlx->range_ve_size = HEIGHT / ft_strlen2d(map->mp_arrs);
+	mlx->range_ho_size =64;
+	mlx->range_ve_size = 64;
 	init_player(mlx, map);
 }
 
@@ -68,7 +68,6 @@ void initialize_mlx(t_mlx *mlx)
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 						 &mlx->line_lentgh, &mlx->endian);
 	if (!mlx->addr)
-    
 	{
 		mlx_destroy_image(mlx->mlx, mlx->img);
 		mlx_destroy_window(mlx->mlx, mlx->win);

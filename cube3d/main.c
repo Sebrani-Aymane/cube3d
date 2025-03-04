@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/03 21:28:47 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/04 02:52:16 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void set_textures(t_mlx *mlx)
 	init_texture(mlx,&mlx->texs.east,"/Users/asebrani/Downloads/EA.xpm");
 	init_texture(mlx,&mlx->texs.south,"/Users/asebrani/Downloads/SO.xpm");
 	init_texture(mlx,&mlx->texs.west,"/Users/asebrani/Downloads/WE.xpm");
+}
+void set_colos(t_map *map, t_mlx *mlx)
+{
+	mlx->floor_color = map->floor_clr[0] << 16 | map->floor_clr[1] << 8 | map->floor_clr[2];
+	mlx->ceiling_color = map->ceiling_clr[0] << 16 | map->ceiling_clr[1] << 8 | map->ceiling_clr[2];
 }
 int	main(int ac, char **av)
 {
@@ -45,7 +50,9 @@ int	main(int ac, char **av)
         return (0);
     }
 	// printer(map ->mp_arrs);
+	
 	set_textures(mlx);
+	set_colos(map,mlx);
 	map_tracing(map, mlx);
 	return(printf("all good\n"), 1);
 }

@@ -27,6 +27,7 @@ int	calculate_steps(int x0, int y0, int x1, int y1)
 
 void	draw_pixel(t_mlx *mlx, float x, float y, int color)
 {
+    printf("hello\n");
 if (round(x) >= 0 && round(x) < WIDTH && round(y) >= 0 && round(y) < HEIGHT)
 		my_mlx_pixel_put(mlx, round(x), round(y), color);
 }
