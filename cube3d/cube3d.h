@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/04 02:19:13 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:30:47 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@
 #  define NUM_RAYS WIDTH
 # endif
 
-
+typedef struct s_coll{
+    void *ptr;
+    struct s_coll *next;
+}t_coll;
 typedef struct s_map_status
 {
     int no_found;

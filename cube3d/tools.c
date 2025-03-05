@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:29:46 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/17 03:29:39 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:38:03 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ char *ft_strtrim(char  *s1, char  *set)
     end = ft_strlenn(s1);
     while (end > start && ft_strchrr(set, s1[end - 1]))
         end--;
-    trimmed = malloc((end - start + 1) * sizeof(char));
+    trimmed = c_malloc((end - start + 1) * sizeof(char),1);
     if (!trimmed)
         return (NULL);
-    strlcpy(trimmed, s1 + start, end - start + 1);
+    ft_strlcpy(trimmed, s1 + start, end - start + 1);
     return (trimmed);
 }
 char *ft_strchrr(char *s, int c)
@@ -73,7 +73,6 @@ char *ft_strchrr(char *s, int c)
 
     while (*s != '\0')
     {
-
         if (*s == char_to_find)
             return ((char *)s);
         s++;

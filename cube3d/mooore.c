@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 10:54:43 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/02 04:16:42 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:42:17 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(char *s1)
 	if (!s1)
 		return (NULL);
 	i = -1;
-	str = malloc(ft_strlenn(s1) + 1);
+	str = c_malloc((ft_strlenn(s1) + 1),1);
 	if (!str)
 		return (NULL);
 	while (s1[++i])
@@ -41,7 +41,7 @@ char	*ft_substr(char *s, int start, int len)
 		return (ft_strdup(""));
 	if (start + len > ft_strlenn(s))
 		len = ft_strlenn(s) - start;
-	str = (char *)malloc((len + 1) * sizeof(char));
+	str = (char *)c_malloc((len + 1) * sizeof(char),1);
 	if (!str)
 		return ((void *)0);
 	while (i < len && s[start + i])

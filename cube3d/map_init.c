@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/17 03:54:38 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:34:54 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_map *map_init(void)
 {
 	t_map *map;
 	
-	map = malloc(sizeof(t_map));
+	map = c_malloc(sizeof(t_map),1);
 	if (!map)
 		return (write(2, "Error: Memory allocation failed\n", 33), NULL);
 	map->ceiling_clr[0] = -1;

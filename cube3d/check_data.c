@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/04 02:28:19 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:44:51 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,24 +110,24 @@ int	parse_color_line(char *line,t_map *map)
 	trimmed = ft_strtrim(line, " \n\t");
 	if (!validate_color_line(trimmed))
 	{
-		free(trimmed);
+		c_malloc(NULL,0);
 		return (0);
 	}
 	char *color_start = skip_space(trimmed + 1);
 	rgb_parts = ft_splitt(color_start, ',');
 	if (!rgb_parts)
 	{
-		free(trimmed);
+		c_malloc(NULL,0);
 		return (0);
 	}
 	if (!parse_color_components(rgb_parts, &r, &g, &b))
 	{
 		free_split_array(rgb_parts);
-		free(trimmed);
+		c_malloc(NULL,0);
 		return (0);
 	}
 	free_split_array(rgb_parts);
-	free(trimmed);
+	c_malloc(NULL,0);
 	if (!validate_color_range(r, g, b))
 		return (0);
 	if (line[0] == 'F')
