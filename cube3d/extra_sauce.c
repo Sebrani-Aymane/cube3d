@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 05:22:35 by asebrani          #+#    #+#             */
-/*   Updated: 2024/12/12 05:27:41 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:27:18 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char **replace_spaces_with_one(char **map)
    char **new_map;
    int i, j;
 
-   new_map = malloc((rows + 1) * sizeof(char *));
+   new_map = c_malloc((rows + 1) * sizeof(char *),1);
    if (!new_map)
 	   return (NULL);
 
@@ -44,12 +44,9 @@ char **replace_spaces_with_one(char **map)
    {
 	   int current_len = ft_strlen(map[i]);
 
-	   new_map[i] = malloc(max_len + 1);
+	   new_map[i] = c_malloc(max_len + 1,1);
 	   if (!new_map[i])
-	   {
-		   while (i > 0)
-			   free(new_map[--i]);
-		   free(new_map);
+	   {	c_malloc(0,0);
 		   return (NULL);
 	   }
 

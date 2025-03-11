@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 19:18:51 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/28 15:30:03 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:32:59 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	if (!s1)
 		return (s2);
-	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	res = c_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1),1);
 	if (!res)
 		return (NULL);
 	while (s1[++i])
@@ -44,7 +44,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j])
 		res[i++] = s2[j++];
 	res[i] = 0;
-	free(s1);
 	return (res);
 }
 
@@ -81,7 +80,7 @@ void	*ft_calloc(int count, int size)
 {
 	char	*res;
 
-	res = malloc(size * count);
+	res = c_malloc(size * count,1);
 	if (!res)
 		return (NULL);
 	ft_bzero(res, size * count);

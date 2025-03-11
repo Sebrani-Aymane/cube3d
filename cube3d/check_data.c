@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/05 23:44:51 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:51:14 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 int is_only_digits(char *str)
 {
 	int i=0;
-    if (str == NULL || *str == '\0') {
+    if (!str|| *str == '\0') {
         return (0);
     }
     while (str[i] != '\0') 
@@ -76,12 +76,13 @@ int	parse_color_components(char **rgb_parts, int *r, int *g, int *b)
 	int	part_count;
 
 	part_count = 0;
+	
 	while (rgb_parts[part_count])
+	{
 		part_count++;
-	if (part_count != 3)
+	}if (part_count != 3)
 		return (0);
-	part_count=0;
-
+	part_count = 0;
 	while (part_count < 3)
 	{
 		if(!is_only_digits(rgb_parts[part_count]))
@@ -102,32 +103,29 @@ int	parse_color_line(char *line,t_map *map)
 {
 	char	*trimmed;
 	char	**rgb_parts;
-	int		r;
-	int		g;
-	int		b;
-
+	int		r =-1;
+	int		g=-1;
+	int		b=-1;
 
 	trimmed = ft_strtrim(line, " \n\t");
 	if (!validate_color_line(trimmed))
 	{
-		c_malloc(NULL,0);
+		c_malloc(0,0);
 		return (0);
 	}
 	char *color_start = skip_space(trimmed + 1);
 	rgb_parts = ft_splitt(color_start, ',');
 	if (!rgb_parts)
 	{
-		c_malloc(NULL,0);
+		c_malloc(0,0);
 		return (0);
 	}
 	if (!parse_color_components(rgb_parts, &r, &g, &b))
 	{
-		free_split_array(rgb_parts);
-		c_malloc(NULL,0);
-		return (0);
+		c_malloc(0,0);
+		write(2,"Missing color configuration\n",29);
+		exit (0);
 	}
-	free_split_array(rgb_parts);
-	c_malloc(NULL,0);
 	if (!validate_color_range(r, g, b))
 		return (0);
 	if (line[0] == 'F')

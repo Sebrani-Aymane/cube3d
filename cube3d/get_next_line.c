@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:02:33 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/27 11:04:43 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:33:46 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_read_function(int fd, char *save)
 
 	if (!save)
 		save = ft_calloc(1, 1);
-	buffer = malloc((int)BUFFER_SIZE + 1);
+	buffer = c_malloc((int)BUFFER_SIZE + 1,1);
 	if (!buffer)
 		return (NULL);
 	nb = 1;
@@ -29,7 +29,6 @@ char	*ft_read_function(int fd, char *save)
 		nb = read(fd, buffer, BUFFER_SIZE);
 		if (nb == -1)
 		{
-			free(buffer);
 			return (NULL);
 		}
 		buffer[nb] = '\0';
@@ -37,7 +36,6 @@ char	*ft_read_function(int fd, char *save)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	free(buffer);
 	return (save);
 }
 
@@ -57,10 +55,7 @@ char	*ft_line(char *save)
 		count++;
 	line = ft_calloc(count + 1, sizeof(char));
 	if (!line)
-	{
-		free(line);
 		return (NULL);
-	}
 	while (++j < count)
 		line[j] = save[j];
 	return (line);
@@ -76,21 +71,14 @@ char	*ft_rest(char *save)
 	while (save[i] && save[i] != '\n')
 		i++;
 	if (!save[i])
-	{
-		free(save);
 		return (NULL);
-	}
 	rest = ft_calloc((ft_strlen(save + i) + 1), sizeof(char));
 	if (!rest)
-	{
-		free(rest);
 		return (NULL);
-	}
 	i++;
 	j = 0;
 	while (save[i])
 		rest[j++] = save[i++];
-	free(save);
 	return (rest);
 }
 
@@ -100,7 +88,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free(save), save = NULL, NULL);
+		return (save = NULL, NULL);
 	save = ft_read_function(fd, save);
 	if (!save)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:14:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/05 23:30:47 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:03:23 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ int ft_strcmp(char *s1, char *s2);
 int     ft_strlenn(char *str);
 char	*ft_strdup(char *s1);
 char	*ft_substr(char *s, int start, int len);
+void	*c_malloc(size_t size, int flag);
 void free_split_array(char **arr);
 char	**ft_splitt(char *s, char c);
 int check_set_chars(char *str, char c);
@@ -180,6 +181,7 @@ int ft_strlcpy(char *dst, const char *src, int dstsize);
 
 void	init_player(t_mlx *mlx, t_map *map);
 void	render_frame(t_mlx *mlx);
+void set_textures(t_map *map,t_mlx *mlx);
 void	move_player(t_mlx *mlx, int forward);
 void	rotate_player(t_mlx *mlx, int clockwise);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);

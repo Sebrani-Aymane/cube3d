@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:54:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/02/17 04:11:57 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:34:41 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,20 +123,17 @@ void create_new_map(t_map **map)
 	
 	if (!map || !*map)
 		return;
-	
 	i = 0;
 	while ((*map)->mp_arrs[i])
 	{
 		len = ft_strlen((*map)->mp_arrs[i]);
-	
-		temp = malloc(len + 3);
+		temp = c_malloc((len + 3),1);
 		if (!temp)
 			return;
 	    temp[0] = ' ';
 		ft_strlcpy(temp + 1, (*map)->mp_arrs[i], len + 1);
 		temp[len + 1] = ' ';
 		temp[len + 2] = '\0';
-		free((*map)->mp_arrs[i]);
 		(*map)->mp_arrs[i] = temp;
 		i++;
 	}

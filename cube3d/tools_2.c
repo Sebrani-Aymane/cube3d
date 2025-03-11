@@ -6,25 +6,11 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:02:19 by asebrani          #+#    #+#             */
-/*   Updated: 2024/11/27 10:53:29 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:35:17 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-static void	ft_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i])
-			free(str[i]);
-		i++;
-	}
-	free(str);
-}
 
 static int	count_word(const char *str, char c)
 {
@@ -69,7 +55,7 @@ char	**ft_splitt(char *s, char c)
 		return (NULL);
 	l = 0;
 	i = 0;
-	dst = (char **)malloc((count_word(s, c) + 1) * sizeof(char *));
+	dst = (char **)c_malloc((count_word(s, c) + 1) * sizeof(char *),1);
 	if (!dst)
 		return (NULL);
 	while (l < count_word(s, c) && s[i])
@@ -79,7 +65,7 @@ char	**ft_splitt(char *s, char c)
 		{
 			dst[l] = ft_substr(s, i - size, size);
 			if (dst[l] == NULL)
-				return (ft_free(dst), NULL);
+				return (NULL);
 			l++;
 		}
 	}

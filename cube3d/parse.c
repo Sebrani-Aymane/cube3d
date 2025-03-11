@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/05 23:42:46 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/11 02:37:36 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	get_texts_infos(char *line)
 	str[0] = ft_del_space(str[0]);
 	result = (!ft_strncmp(str[0], "NO", 2) || !ft_strncmp(str[0], "WE", 2)
 			|| !ft_strncmp(str[0], "SO", 2) || !ft_strncmp(str[0], "EA", 2));
-	free(str);
 	return (result);
 }
 
@@ -48,7 +47,7 @@ int	get_colors_infos(char *line)
 		return (0);
 	str[0] = ft_del_space(str[0]);
 	result = (!ft_strncmp(str[0], "F", 1) || !ft_strncmp(str[0], "C", 1));
-	free(str);
+
 	return (result);
 }
 
@@ -64,11 +63,11 @@ int parse_map(char *str,t_map **map)
 	
 	*map = map_init();
 	if (!*map)
-		return (c_malloc(NULL,0),1);
+		return (c_malloc(0,0),1);
 	counter_clr = counter_texts = 0;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
-		return (c_malloc(NULL,0), write(2, "Error: Couldn't open file\n", 27), 1);
+		return (c_malloc(0,0), write(2, "Error: Couldn't open file\n", 27), 1);
 	(*map)->fd = fd;
 	while ((line = get_next_line(fd)))
 	{
@@ -82,17 +81,17 @@ int parse_map(char *str,t_map **map)
 		{
 			*map = check_texts(after, *map);
 			if (!*map)
-				return (c_malloc(NULL,0), close(fd), 1);
+				return (c_malloc(0,0), close(fd), 1);
 			counter_texts++;
 		}
 		else if (parse_color_line(after,*map))
 			counter_clr++;
 	}
 	if (!check_texture_completeness(*map))
-			return (c_malloc(NULL,0), close(fd), 1);
+			return (c_malloc(0,0), close(fd), 1);
 	if (!parse_map_strct(*map,fd,line))
-		return 1;
+		return (c_malloc(0,0), close(fd), 1);
 	if (!find_player(*map))
-		return(write(2, "Invalid starting pos\n", 21), 1);
+		return(write(2, "Invalid starting pos\n", 21), c_malloc(0,0), close(fd),1);
 	return (validate_map(*map));
 }
