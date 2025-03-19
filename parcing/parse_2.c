@@ -39,11 +39,11 @@ t_map *check_texts(char *line, t_map *map)
 		write(2, "Error: Invalid texture definition\n", 34);
 		return (NULL);
 	}
-	// if (!is_valid_file(str[1]))
-	// {
-	// 	write(2, "Error: Cannot access/locate texture file\n", 41);
-	// 	return (NULL);
-	// }
+	if (!is_valid_file(str[1]))
+	{
+		write(2, "Error: Cannot access/locate texture file\n", 41);
+		return (NULL);
+	}
 	if (is_duplicate_direction(str[0], map))
 		return (NULL);
 	if (ft_strcmp(str[0], "NO") == 0)

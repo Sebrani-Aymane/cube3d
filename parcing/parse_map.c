@@ -15,37 +15,38 @@
 int	check_double_lines(char *str)
 {
 	if (!str)
-		return (write(2,"map error\n", 10), 1);
+		return (write(2, "map error\n", 10), 1);
 	if (str[ft_strlenn(str)] == '\n')
 		return (1);
 	while (*str)
 	{
 		if (*str == '\n' && *str == *(str + 1))
-			return (write(2,"map error\n", 10),1);
+			return (write(2, "map error\n", 10), 1);
 		str++;
 	}
 	return (0);
 }
 
-int parse_map_strct(t_map *map, int fd,char *line)
+int	parse_map_strct(t_map *map, int fd, char *line)
 {
-    char **map_grid;
-    int i;
-    int j;
-    char	*temp;
+	char	**map_grid;
+	int		i;
+	int		j;
+	char	*temp;
 	char	*join;
-    i = j = 0;
 
+	i = 0;
+	j = 0;
 	temp = NULL;
 	if (!line || !*line)
-		return(write(2, "Error map!\n", 12),close(fd) ,0);
+		return (write(2, "Error map!\n", 12), close(fd), 0);
 	join = ft_strdup("");
 	if (*line == '1' || *line == '0')
 		temp = line;
-	else 
+	else
 		temp = get_next_line(fd);
 	if (!temp)
-		return(write(2, "Error map!\n", 12),close(fd) ,0);
+		return (write(2, "Error map!\n", 2), close(fd), 0);
 	while (temp)
 	{
 		join = ft_strjoin(join, temp);
@@ -58,15 +59,16 @@ int parse_map_strct(t_map *map, int fd,char *line)
 	return (1);
 }
 
-int parse_map_grid(t_map *map)
+int	parse_map_grid(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
+
 	i = 0;
-	if (!check_set_chars(map->mp_arrs[0],'1'))
+	if (!check_set_chars(map->mp_arrs[0], '1'))
 		return (write(2, "0 is near a space\n", 18), 0);
 	while (map->mp_arrs[i])
-	{	
+	{
 		j = 0;
 		while (map->mp_arrs[i][j])
 		{
@@ -77,7 +79,7 @@ int parse_map_grid(t_map *map)
 		}
 		i++;
 	}
-	if (!check_set_chars(map->mp_arrs[i-1], '1'))
+	if (!check_set_chars(map->mp_arrs[i - 1], '1'))
 		return (write(2, "0 is near a space\n", 18), 0);
-	return(1);
+	return (1);
 }

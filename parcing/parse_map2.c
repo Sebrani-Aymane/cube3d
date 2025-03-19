@@ -12,20 +12,20 @@
 
 #include "../cub3D.h"
 
-int find_player(t_map *map)
+int	find_player(t_map *map)
 {
 	int	i;
 	int	j;
-	int count;
+	int	count;
 
 	i = 0;
 	count = 0;
-	while(map->mp_arrs[i])
+	while (map->mp_arrs[i])
 	{
 		j = 0;
-		while(map->mp_arrs[i][j])
+		while (map->mp_arrs[i][j])
 		{
-			if ((map->mp_arrs[i][j] == 'N' || map->mp_arrs[i][j] == 'S' || 
+			if ((map->mp_arrs[i][j] == 'N' || map->mp_arrs[i][j] == 'S' ||
 				map->mp_arrs[i][j] == 'W' || map->mp_arrs[i][j] == 'E'))
 				count++;
 			j++;
@@ -37,23 +37,11 @@ int find_player(t_map *map)
 	return (1);
 }
 
-void printer(char **str)
+int	validate_map(t_map *map)
 {
-	int i;
-	i = 0;
-
-	while (str[i])
-	{
-		printf("%s\n",str[i]);
-		i++;
-	}
-}
-
-int validate_map(t_map *map)
-{
-	int i;
-	int j;
-	char curr;
+	int		i;
+	int		j;
+	char	curr;
 
 	i = 0;
 	while (map->mp_arrs[i])
@@ -62,12 +50,11 @@ int validate_map(t_map *map)
 		while (map->mp_arrs[i][j])
 		{
 			curr = map->mp_arrs[i][j];
-			if (curr != '0' && curr != '\n' &&
-				curr != '1' && curr != ' ')
+			if (curr != '0' && curr != '\n'
+				&& curr != '1' && curr != ' ')
 			{
-				if (curr != 'E' && curr != 'W' &&        
-					curr != 'S' && curr != 'N')
-					return (write(2, "invalid char in map\n", 20),1);
+				if (curr != 'E' && curr != 'W' && curr != 'S' && curr != 'N')
+					return (write(2, "invalid char in map\n", 20), 1);
 				map->x_player_pos = j;
 				map->y_player_pos = i;
 				map->start_direction = curr;
@@ -76,61 +63,61 @@ int validate_map(t_map *map)
 		}
 		i++;
 	}
-
 	return (0);
 }
 
-int count_map_rows(char **map)
+int	count_map_rows(char **map)
 {
-    int rows;
+	int	rows;
 
-    if (!map)
-        return (0);
-
-    rows = 0;
-    while (map[rows] != NULL)
-        rows++;
-
-    return (rows);
+	if (!map)
+		return (0);
+	rows = 0;
+	while (map[rows] != NULL)
+		rows++;
+	return (rows);
 }
-int check_for_surrounds(int i, int j, char **map)
+
+int	check_for_surrounds(int i, int j, char **map)
 {
-    int map_rows;
-    int row_len;
-    if (!map || !map[i])
-        return (1);
-    map_rows = count_map_rows(map);
-    row_len = ft_strlen(map[i]);
-    if (j > 0 && j + 1 < row_len)
-    {
-        if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-            return (write(2, "0 is near a space\n", 18), 0);
-    }
-    if (i > 0 && i + 1 < map_rows)
-    {
-        if (j < ft_strlen(map[i-1]) && map[i-1][j] == ' ')
-            return (write(2, "0 is near a space\n", 18), 0);
-        if (j < ft_strlen(map[i+1]) && map[i+1][j] == ' ')
-            return (write(2, "0 is near a space\n", 18), 0);
-    }
-    return (1);
+	int	map_rows;
+	int	row_len;
+
+	if (!map || !map[i])
+		return (1);
+	map_rows = count_map_rows(map);
+	row_len = ft_strlen(map[i]);
+	if (j > 0 && j + 1 < row_len)
+	{
+		if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
+			return (write(2, "0 is near a space\n", 18), 0);
+	}
+	if (i > 0 && i + 1 < map_rows)
+	{
+		if (j < ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
+			return (write(2, "0 is near a space\n", 18), 0);
+		if (j < ft_strlen(map[i + 1]) && map[i + 1][j] == ' ')
+			return (write(2, "0 is near a space\n", 18), 0);
+	}
+	return (1);
 }
-void create_new_map(t_map **map)
+
+void	create_new_map(t_map **map)
 {
-	char *temp;
-	int i;
-	int len;
-	
+	char	*temp;
+	int		i;
+	int		len;
+
 	if (!map || !*map)
-		return;
+		return ;
 	i = 0;
 	while ((*map)->mp_arrs[i])
 	{
 		len = ft_strlen((*map)->mp_arrs[i]);
-		temp = c_malloc((len + 3),1);
+		temp = c_malloc((len + 3), 1);
 		if (!temp)
-			return;
-	    temp[0] = ' ';
+			return ;
+		temp[0] = ' ';
 		ft_strlcpy(temp + 1, (*map)->mp_arrs[i], len + 1);
 		temp[len + 1] = ' ';
 		temp[len + 2] = '\0';

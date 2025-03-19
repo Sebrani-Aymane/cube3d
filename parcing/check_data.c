@@ -62,7 +62,7 @@ int	ft_atoi(const char *str)
 int	is_valid_file(char *path)
 {
 	char	*str;
-
+	printf("%s\n",path);
 	str = ft_strtrim(path, "\n");
 	if (access(str, F_OK | R_OK) == 0)
 		return (1);
