@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:34:22 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/19 05:45:38 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,67 @@ int	check_double_lines(char *str)
 	return (0);
 }
 
-int	parse_map_strct(t_map *map, int fd, char *line)
+char	*collect_map_lines(int fd, char *line)
 {
-	char	**map_grid;
-	int		i;
-	int		j;
-	char	*temp;
 	char	*join;
+	char	*temp;
 
-	i = 0;
-	j = 0;
-	temp = NULL;
-	if (!line || !*line)
-		return (write(2, "Error map!\n", 12), close(fd), 0);
 	join = ft_strdup("");
+	if (!join)
+		return (NULL);
 	if (*line == '1' || *line == '0')
 		temp = line;
 	else
 		temp = get_next_line(fd);
 	if (!temp)
-		return (write(2, "Error map!\n", 2), close(fd), 0);
+	{
+		write(2, "Error map!\n", 12);
+		return (NULL);
+	}
 	while (temp)
 	{
 		join = ft_strjoin(join, temp);
+		if (!join)
+			return (NULL);
 		temp = get_next_line(fd);
 	}
-	if (check_double_lines(join))
+	return (join);
+}
+
+int	validate_and_process_map(char *joined_map, t_map *map)
+{
+	char	**map_grid;
+
+	if (check_double_lines(joined_map))
 		return (0);
-	map_grid = ft_splitt(join, '\n');
+	map_grid = ft_splitt(joined_map, '\n');
+	if (!map_grid)
+		return (0);
 	map->mp_arrs = map_grid;
+	return (1);
+}
+
+int	parse_map_strct(t_map *map, int fd, char *line)
+{
+	char	*joined_map;
+
+	if (!line || !*line)
+	{
+		write(2, "Error map!\n", 12);
+		close(fd);
+		return (0);
+	}
+	joined_map = collect_map_lines(fd, line);
+	if (!joined_map)
+	{
+		close(fd);
+		return (0);
+	}
+	if (!validate_and_process_map(joined_map, map))
+	{
+		close(fd);
+		return (0);
+	}
 	return (1);
 }
 

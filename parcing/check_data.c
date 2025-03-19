@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:51:14 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/19 05:14:43 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_atoi(const char *str)
 int	is_valid_file(char *path)
 {
 	char	*str;
-	printf("%s\n",path);
+
 	str = ft_strtrim(path, "\n");
 	if (access(str, F_OK | R_OK) == 0)
 		return (1);

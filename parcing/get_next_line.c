@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:02:33 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:33:46 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/19 05:20:21 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 char	*ft_read_function(int fd, char *save)
 {
 	char		*buffer;
-	int		nb;
+	int			nb;
 
 	if (!save)
 		save = ft_calloc(1, 1);
-	buffer = c_malloc((int)BUFFER_SIZE + 1,1);
+	buffer = c_malloc((int)BUFFER_SIZE + 1, 1);
 	if (!buffer)
 		return (NULL);
 	nb = 1;

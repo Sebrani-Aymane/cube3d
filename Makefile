@@ -11,6 +11,7 @@ SRCS = main.c \
 		parcing/parse_2.c \
 		parcing/parse_map2.c \
 		parcing/mooore.c \
+		parcing/more1.c
 		parcing/tools_2.c \
 		parcing/tools.c \
 		parcing/get_next_line.c \
