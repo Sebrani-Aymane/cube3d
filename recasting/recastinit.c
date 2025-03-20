@@ -35,7 +35,7 @@ void	init_player_rays(t_mlx *mlx)
 void	init_player(t_mlx *mlx, t_map *map)
 {
 	mlx->move_speed = 3.0;
-	mlx->rotation_speed = 0.05;
+	mlx->rotation_speed = 0.1;
 	mlx->map = map;
 	mlx->flag = 0;
 	init_player_rays(mlx);

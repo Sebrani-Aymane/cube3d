@@ -26,7 +26,7 @@ void	render_frame(t_mlx *mlx)
 		mlx->addr[i] = 0;
 		i++;
 	}
-	draw2d(mlx->map, mlx);
+	place_player(mlx->map, mlx);
 	cast_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }

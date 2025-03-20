@@ -12,67 +12,43 @@
 
 #include "../cub3D.h"
 
-void	draw_grid(t_mlx *mlx, int cell_width, int cell_height)
+void	initialize_cell_sizes(t_mlx *mlx)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x <= WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			my_mlx_pixel_put(mlx, x, y, 0xff0000);
-			y++;
-		}
-		x += cell_width;
-	}
-	y = 0;
-	while (y <= HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			my_mlx_pixel_put(mlx, x, y, 0xff0000);
-			x++;
-		}
-		y += cell_height;
-	}
-}
-
-void	draw2d(t_map *map, t_mlx *mlx)
-{
-	int	y;
-	int	x;
-
-	y = 0;
 	mlx->range_ho_size = 64;
 	mlx->range_ve_size = 64;
+}
+
+void	set_player_position(t_map *map, t_mlx *mlx)
+{
+	int	y;
+	int	x;
+
+	y = 0;
 	while (map->mp_arrs[y])
 	{
 		x = 0;
 		while (map->mp_arrs[y][x])
 		{
-			if (map->mp_arrs[y][x] == '0' || map->mp_arrs[y][x] == 'W' ||
-					map->mp_arrs[y][x] == 'E' || map->mp_arrs[y][x] == 'S' ||
-						map->mp_arrs[y][x] == 'N')
+			if (map->mp_arrs[y][x] == 'W' || map->mp_arrs[y][x] == 'E' ||
+				map->mp_arrs[y][x] == 'S' || map->mp_arrs[y][x] == 'N')
 			{
-				if (map->mp_arrs[y][x] == 'W' || map->mp_arrs[y][x] == 'E' ||
-					map->mp_arrs[y][x] == 'S' || map->mp_arrs[y][x] == 'N')
+				if (mlx->flag == 0)
 				{
-					if (mlx->flag == 0)
-					{
-						mlx->player_x = x * mlx->range_ho_size
-							+ mlx->range_ho_size / 2;
-						mlx->player_y = y * mlx->range_ve_size
-							+ mlx->range_ve_size / 2;
-						mlx->flag = 1;
-					}
+					mlx->player_x = x * mlx->range_ho_size
+						+ mlx->range_ho_size / 2;
+					mlx->player_y = y * mlx->range_ve_size
+						+ mlx->range_ve_size / 2;
+					mlx->flag = 1;
 				}
 			}
 			x++;
 		}
 		y++;
 	}
+}
+
+void	place_player(t_map *map, t_mlx *mlx)
+{
+	initialize_cell_sizes(mlx);
+	set_player_position(map, mlx);
 }
