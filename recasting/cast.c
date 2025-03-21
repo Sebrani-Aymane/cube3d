@@ -12,30 +12,20 @@
 
 #include "../cub3D.h"
 
-void	prepare_wall_texture(t_mlx *mlx, int strip_id, t_texture **texture,
-							double *tex_x)
+void	draw_ceiling_and_floor(t_mlx *mlx, int strip_id, t_draw_data *d)
 {
-	if (mlx->rays[strip_id].hit_ver)
+	d->y = 0;
+	while (d->y < d->wall_top)
 	{
-		*tex_x = fmod(mlx->rays[strip_id].wallhity, 64);
-		if (mlx->rays[strip_id].facing_left)
-			*texture = &mlx->texs.west;
-		else
-			*texture = &mlx->texs.east;
+		my_mlx_pixel_put(mlx, strip_id, d->y, mlx->ceiling_color);
+		d->y++;
 	}
-	else
+	d->y = d->wall_bottom;
+	while (d->y < HEIGHT)
 	{
-		*tex_x = fmod(mlx->rays[strip_id].wallhitx, 64);
-		if (mlx->rays[strip_id].facing_down)
-			*texture = &mlx->texs.south;
-		else
-			*texture = &mlx->texs.north;
+		my_mlx_pixel_put(mlx, strip_id, d->y, mlx->floor_color);
+		d->y++;
 	}
-	*tex_x = (*tex_x * (*texture)->width) / 64;
-	if (mlx->rays[strip_id].hit_ver && mlx->rays[strip_id].facing_left)
-		*tex_x = (*texture)->width - *tex_x;
-	if (!mlx->rays[strip_id].hit_ver && mlx->rays[strip_id].facing_down)
-		*tex_x = (*texture)->width - *tex_x;
 }
 
 void	draw_wall(t_mlx *mlx, int strip_id)
@@ -52,25 +42,13 @@ void	draw_wall(t_mlx *mlx, int strip_id)
 	d.wall_top = (HEIGHT / 2) - (d.wall_height / 2);
 	d.wall_bottom = (HEIGHT / 2) + (d.wall_height / 2);
 	d.tex_offset = (double)texture->height / d.wall_height;
-	//sma
-	d.y = 0;
-	while (d.y < d.wall_top)
-	{
-		my_mlx_pixel_put(mlx, strip_id, d.y, mlx->ceiling_color);
-		d.y++;
-	}
-	//hwiyet
+	draw_ceiling_and_floor(mlx, strip_id, &d);
+	d.y = d.wall_top;
 	while (d.y < d.wall_bottom)
 	{
 		tex_y = (d.y - d.wall_top) * d.tex_offset;
 		color = get_texture_color(texture, tex_x, tex_y);
 		my_mlx_pixel_put(mlx, strip_id, d.y, color);
-		d.y++;
-	}
-	//l ard
-	while (d.y < HEIGHT)
-	{
-		my_mlx_pixel_put(mlx, strip_id, d.y, mlx->floor_color);
 		d.y++;
 	}
 }

@@ -11,7 +11,7 @@ SRCS = main.c \
 		parcing/parse_2.c \
 		parcing/parse_map2.c \
 		parcing/mooore.c \
-		parcing/more1.c
+		parcing/more1.c \
 		parcing/tools_2.c \
 		parcing/tools.c \
 		parcing/get_next_line.c \
@@ -19,12 +19,15 @@ SRCS = main.c \
 		parcing/parse_map.c \
     	recasting/tracing.c \
 		recasting/tractools.c \
-		recasting/pov.c \
 		recasting/recastinit.c \
 		recasting/keys_control.c \
-		recasting/draw.c \
+		recasting/keys_control2.c \
+		recasting/keys_control3.c \
+		recasting/player.c \
 		recasting/cast.c \
 		recasting/cast2.c \
+		recasting/horizontal.c \
+		recasting/vertical.c \
 		set_textures/load_texts.c \
 		free_leaks.c
 

@@ -44,10 +44,7 @@ int	main(int ac, char **av)
 	map ->mp_arrs = replace_spaces_with_one(map->mp_arrs);
 	mlx = c_malloc(sizeof(t_mlx), 1);
 	if (!mlx)
-	{
-		write(2, "Memory allocation failed\n", 24);
-		return (0);
-	}
+		return (write(2, "Memory allocation failed\n", 24), 0);
 	set_colos(map, mlx);
 	set_textures(map, mlx);
 	map_tracing(map, mlx);

@@ -77,15 +77,23 @@ typedef struct s_map{
 
 /////////////////Tracing structs
 
-typedef struct s_keys
+typedef struct s_ray_params
 {
-    int w_pressed;
-    int s_pressed;
-    int a_pressed;
-    int d_pressed;
-    int left_pressed;
-    int right_pressed;
-} t_keys;
+    float ray_angle;
+    float x_intercept;
+    float y_intercept;
+    float x_step;
+    float y_step;
+} t_ray_params;
+
+typedef struct s_horz_params
+{
+    float ray_angle;
+    float y_intercept;
+    float x_intercept;
+    float y_step;
+    float x_step;
+} t_horz_params;
 
 typedef struct s_texture {
     void    *img;
@@ -103,6 +111,39 @@ typedef struct s_textures{
     t_texture east;
     t_texture west;
 }t_textures;
+
+typedef struct s_keys
+{
+    int w_pressed;
+    int s_pressed;
+    int a_pressed;
+    int d_pressed;
+    int left_pressed;
+    int right_pressed;
+} t_keys;
+
+typedef struct s_player {
+    float x;
+    float y;
+    float angle;
+} t_player;
+
+typedef struct s_draw_data {
+    int wall_top;
+    int wall_bottom;
+    float wall_height;
+    double tex_offset;
+    int y;
+} t_draw_data;
+
+typedef struct s_hit_points {
+    float horz_x;
+    float horz_y;
+    float vert_x;
+    float vert_y;
+    int found_horz;
+    int found_vert;
+} t_hit_points;
 
 typedef struct s_rays
 {
@@ -147,11 +188,12 @@ typedef struct s_mlx
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void printer(char **str);
+// void printer(char **str);
 int	is_only_digits(char *str);
 int	ft_atoi(const char *str);
 
 // int process_map_lines(int fd, t_map **map);
+int	get_texts_infos(char *line);
 void    assign_color_to_map(char type, t_map *map, t_color color);
 int	    extract_rgb_values(char *color_start, t_color *color);
 int     validate_color_range(int r, int g, int b);
@@ -194,44 +236,52 @@ char *ft_strchrr(char *s, int c);
 char	*get_next_line(int fd);
 int ft_strlcpy(char *dst, const char *src, int dstsize);
 
-///////////////Tracing function
+///////////////reacast function
 
-void    cast_rays(t_mlx *mlx);
-// void    draw_walls(t_mlx *mlx);
-void    setup_hooks(t_mlx *mlx);
-void	render_frame(t_mlx *mlx);
-float   normal_angle(float angle);
-void	initialize_mlx(t_mlx *mlx);
-void	draw2d(t_map *map, t_mlx *mlx);
-void	draw_pov(t_map *map, t_mlx *mlx);
-void    set_textures(t_map *map,t_mlx *mlx);
-void    init_player(t_mlx *mlx, t_map *map);
 void	map_tracing(t_map *map, t_mlx *mlx);
-void	move_player(t_mlx *mlx, int forward);
-void	rotate_player(t_mlx *mlx, int clockwise);
-void    initialize_ray(t_rays *ray, float ray_angle);
+void	initialize_mlx(t_mlx *mlx);
 void	initialize_map_settings(t_map *map, t_mlx *mlx);
+void	init_player(t_mlx *mlx, t_map *map);
+void	init_player_rays(t_mlx *mlx);
+
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void	draw_grid(t_mlx *mlx, int cell_width, int cell_height);
-void	draw_line_dda(t_mlx *mlx, int x0, int y0, int x1, int y1, int color);
-void	calculate_endpoint(t_mlx *mlx, int length, double angle, int *x_end, int *y_end);
-// void	draw_tile(t_mlx *mlx, int x, int y, int range_ho_size, int range_ve_size, int color);
-void    find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *horz_x, float *horz_y, int *found);
-void    find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, float *vert_x, float *vert_y, int *found);
-int game_loop(t_mlx *mlx);
-int game_loop(t_mlx *mlx);
-int close_wind(t_mlx *mlx);
-int ft_strlen2d(char **str);
-int key_press(int keycode, t_mlx *mlx);
-int key_press(int keycode, t_mlx *mlx);
-int key_release(int keycode, t_mlx *mlx);
-int key_release(int keycode, t_mlx *mlx);
-int is_valid_position(t_mlx *mlx, int new_x, int new_y);
+int     close_wind(t_mlx *mlx);
+int     ft_strlen2d(char **str);
+
+void	render_frame(t_mlx *mlx);
+void	place_player(t_map *map, t_mlx *mlx);
+void	initialize_cell_sizes(t_mlx *mlx);
+void	set_player_position(t_map *map, t_mlx *mlx);
+
+void	cast_rays(t_mlx *mlx);
+float	normal_angle(float angle);
+void	initialize_ray(t_rays *ray, float ray_angle);
+void	draw_wall(t_mlx *mlx, int strip_id);
+void	prepare_wall_texture(t_mlx *mlx, int strip_id, t_texture **texture, double *tex_x);
+void	finalize_ray(t_rays *ray, float ray_angle, float player_angle);
+void	choose_closest_hit(t_rays *ray, t_hit_points *hit, t_player *player);
+float	calculate_distance(float x1, float y1, float x2, float y2);
+unsigned int	*get_pixels(unsigned char *img, int len);
+unsigned int	convert_bytes_to_int(unsigned char *img, int *i);
+void    find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, t_hit_points *hit);
+void	find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, t_hit_points *hit);
+
+
+void    setup_hooks(t_mlx *mlx);
+int     key_press(int keycode, t_mlx *mlx);
+int     key_release(int keycode, t_mlx *mlx);
+int     game_loop(t_mlx *mlx);
+void	rotate_player(t_mlx *mlx, int clockwise);
+void    strafe_player(t_mlx *mlx, int right);
+void	move_player(t_mlx *mlx, int forward);
+int     is_valid_position(t_mlx *mlx, int new_x, int new_y);
+void	update_position(t_mlx *mlx, int new_x, int new_y);
+
 
 
 // set textures
 unsigned int get_texture_color(t_texture *texture, int x, int y);
 int init_texture(void *mlx, t_texture *texture, char *path);
-
+void set_textures(t_map *map, t_mlx *mlx);
 
 #endif

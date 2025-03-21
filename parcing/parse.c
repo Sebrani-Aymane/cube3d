@@ -57,7 +57,7 @@ int	read_map_configuration(t_map **map, int fd, char **line)
 	counter_texts = 0;
 	while (1)
 	{
-		*line = get_next_line(fd)
+		*line = get_next_line(fd);
 			if (!*line)
 			break;
 		result = process_map_line(*line, map, &counter_clr, &counter_texts);

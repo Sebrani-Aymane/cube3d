@@ -1,132 +1,94 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast2.c                                            :+:      :+:    :+:   */
+/*   cast3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 03:47:12 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/04 02:13:26 by asebrani         ###   ########.fr       */
+/*   Created: 2025-03-20 05:22:39 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025-03-20 05:22:39 by kaafkhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void    find_horizontal_hit(t_mlx *mlx, t_rays *ray, float ray_angle, t_hit_points *hit)
+unsigned int	convert_bytes_to_int(unsigned char *img, int *i)
 {
-	float y_intercept;
-	float x_intercept;
-	float y_step;
-	float x_step;
-	float next_x;
-	float next_y;
+	unsigned int	byte1;
+	unsigned int	byte2;
+	unsigned int	byte3;
+	unsigned int	byte4;
 
-	y_intercept = floor(mlx->player_y / mlx->range_ve_size) * mlx->range_ve_size;
-	if (ray->facing_down)
+	byte1 = (unsigned int)img[*i++];
+	byte2 = (unsigned int)img[*i++] << 8;
+	byte3 = (unsigned int)img[*i++] << 16;
+	byte4 = (unsigned int)img[*i++] << 24;
+	return (byte1 | byte2 | byte3 | byte4);
+}
+
+unsigned int	*get_pixels(unsigned char *img, int len)
+{
+	int				i;
+	int				t;
+	unsigned int	*ret;
+
+	if (!img || len % 4 != 0)
+		return (NULL);
+	ret = c_malloc((len / 4) * sizeof(unsigned int), 1);
+	if (!ret)
+		return (NULL);
+	i = 0;
+	t = 0;
+	while (i < len)
 	{
-	    y_intercept += mlx->range_ve_size;
+		ret[t++] = convert_bytes_to_int(img, &i);
 	}
-	x_intercept = mlx->player_x + (y_intercept - mlx->player_y) / tan(ray_angle);
-	if (ray->facing_up)
+	return (ret);
+}
+
+float	calculate_distance(float x1, float y1, float x2, float y2)
+{
+	float	dx;
+	float	dy;
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	return (sqrtf(dx * dx + dy * dy));
+}
+
+void	choose_closest_hit(t_rays *ray, t_hit_points *hit, t_player *player)
+{
+	float	horz_distance;
+	float	vert_distance;
+
+	horz_distance = FLT_MAX;
+	vert_distance = FLT_MAX;
+	if (hit->found_horz)
+		horz_distance = calculate_distance(player->x, player->y,
+				hit->horz_x, hit->horz_y);
+	if (hit->found_vert)
+		vert_distance = calculate_distance(player->x, player->y,
+				hit->vert_x, hit->vert_y);
+	if (horz_distance < vert_distance)
 	{
-	    y_step = -mlx->range_ve_size;
+		ray->distance = horz_distance;
+		ray->wallhitx = hit->horz_x;
+		ray->wallhity = hit->horz_y;
+		ray->hit_ver = 0;
 	}
 	else
 	{
-	    y_step = mlx->range_ve_size;
+		ray->distance = vert_distance;
+		ray->wallhitx = hit->vert_x;
+		ray->wallhity = hit->vert_y;
+		ray->hit_ver = 1;
 	}
-	x_step = mlx->range_ve_size / tan(ray_angle);
-	if (ray->facing_left && x_step > 0)
-	{
-	    x_step = -x_step;
-	}
-	else if (ray->facing_right && x_step < 0)
-	{
-	    x_step = -x_step;
-	}
-	next_x = x_intercept;
-	next_y = y_intercept;
-	hit->found_horz = 0;
-	while (next_x >= 0 && next_x <ft_strlen(mlx->map->mp_arrs[0]) * 64 && next_y >= 0 && next_y < ft_strlen2d(mlx->map->mp_arrs) * 64)
-	{
-		int map_x = (int)(next_x / mlx->range_ho_size);
-		int map_y;
-		if (ray->facing_up)
-		{
-			map_y = (int)((next_y - 1) / mlx->range_ve_size);
-		}
-		else
-		{
-			map_y = (int)(next_y / mlx->range_ve_size);
-		}
-		if (map_y >= 0 && map_y < ft_strlen2d(mlx->map->mp_arrs) &&
-			map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[0]) &&
-			mlx->map->mp_arrs[map_y][map_x] == '1')
-		{
-			hit->horz_x = next_x;
-			hit->horz_y = next_y;
-			hit->found_horz = 1;
-			break ;
-		}
-		next_x += x_step;
-		next_y += y_step;
-	}
+	if (ray->distance < 0.1)
+		ray->distance = 0.1;
 }
 
-void	find_vertical_hit(t_mlx *mlx, t_rays *ray, float ray_angle, t_hit_points *hit)
+void	finalize_ray(t_rays *ray, float ray_angle, float player_angle)
 {
-	float	x_intercept;
-	float	y_intercept;
-	float	x_step;
-	float	y_step;
-	float	next_x;
-	float	next_y;
-	int		map_x;
-    
-	x_intercept= floor(mlx->player_x / mlx->range_ho_size) * mlx->range_ho_size;
-	if (ray->facing_right)
-	{
-		x_intercept += mlx->range_ho_size;
-	}
-	y_intercept = mlx->player_y + (x_intercept - mlx->player_x) * tan(ray_angle);
-	x_step = mlx->range_ho_size;
-	if (ray->facing_left)
-	{
-		x_step = -x_step;
-	}
-	y_step = mlx->range_ho_size * tan(ray_angle);
-	if (ray->facing_up && y_step > 0)
-	{
-		y_step = -y_step;
-	}
-	else if (ray->facing_down && y_step < 0)
-	{
-		y_step = -y_step;
-	}
-	next_x = x_intercept;
-	next_y = y_intercept;
-	hit->found_vert = 0; 
-	while (next_x >= 0 && next_x < ft_strlen(mlx->map->mp_arrs[0]) * 64 && next_y >= 0 && next_y < ft_strlen2d(mlx->map->mp_arrs) * 64)
-	{
-		if (ray->facing_left)
-		{
-			map_x = (int)((next_x - 1) / mlx->range_ho_size);
-		}
-		else
-		{
-			map_x = (int)(next_x / mlx->range_ho_size);
-		}
-		int map_y = (int)(next_y / mlx->range_ve_size);
-		if (map_y >= 0 && map_y < ft_strlen2d(mlx->map->mp_arrs) &&
-			map_x >= 0 && map_x < ft_strlen(mlx->map->mp_arrs[0]) &&
-			mlx->map->mp_arrs[map_y][map_x] == '1')
-		{
-			hit->vert_x = next_x;
-			hit->vert_y = next_y;
-			hit->found_vert = 1;
-			break ;
-		}
-		next_x += x_step;
-		next_y += y_step;
-	}
+	ray->ray_angle = ray_angle;
+	ray->distance *= cosf(player_angle - ray_angle);
 }
