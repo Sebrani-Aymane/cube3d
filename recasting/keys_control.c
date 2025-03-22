@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys_control.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-21 00:48:30 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-03-21 00:48:30 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/03/21 00:48:30 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/22 03:29:05 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	game_loop(t_mlx *mlx)
 		strafe_player(mlx, 0);
 	if (mlx->keys.d_pressed)
 		strafe_player(mlx, 1);
+	if (mlx->keys.attack)
+		mlx->weapon.is_attacking = 1;
 	return (0);
 }
 
@@ -55,6 +57,8 @@ int	key_release(int keycode, t_mlx *mlx)
 		mlx->keys.left_pressed = 0;
 	else if (keycode == 124)
 		mlx->keys.right_pressed = 0;
+	else if (keycode == 72)
+		mlx->keys.attack = 0;
 	return (0);
 }
 
@@ -77,6 +81,8 @@ int	key_press(int keycode, t_mlx *mlx)
 		mlx->keys.left_pressed = 1;
 	else if (keycode == 124)
 		mlx->keys.right_pressed = 1;
+	else if (keycode == 72)
+		mlx->keys.attack=1;
 	return (0);
 }
 

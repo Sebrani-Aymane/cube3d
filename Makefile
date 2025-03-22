@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror   #-fsanitize=address -g -Ofast
+FLAGS = -Wall -Wextra -Werror   -fsanitize=address -g -Ofast
 
 SRCS = main.c \
 		parcing/parse.c \
@@ -29,6 +29,7 @@ SRCS = main.c \
 		recasting/horizontal.c \
 		recasting/vertical.c \
 		set_textures/load_texts.c \
+		set_textures/sprites.c \
 		free_leaks.c
 
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   castnorm.c                                         :+:      :+:    :+:   */
+/*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-21 05:42:28 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-03-21 05:42:28 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/03/21 05:42:28 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/22 02:56:55 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	calculate_horz_steps(t_rays *ray, t_mlx *mlx, t_horz_params *params)
 		params->x_step = -params->x_step;
 }
 
-void	nitialize_horz_hit(t_mlx *mlx, t_rays *ray, t_horz_params
+void	initialize_horz_hit(t_mlx *mlx, t_rays *ray, t_horz_params
 		*params, float ray_angle)
 {
 	params->ray_angle = ray_angle;

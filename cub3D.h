@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                               :+:      :+:   :+: */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-19 02:06:57 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-03-19 02:06:57 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/03/19 02:06:57 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/22 03:29:33 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_keys
     int a_pressed;
     int d_pressed;
     int left_pressed;
+    int     attack;
     int right_pressed;
 } t_keys;
 
@@ -145,6 +146,15 @@ typedef struct s_hit_points {
     int found_vert;
 } t_hit_points;
 
+typedef struct s_weapon_animation {
+    t_texture frames[4];      
+    int current_frame;        
+    int frame_counter;        
+    int is_attacking;
+    struct s_weapon_animation *weapon;         
+    int frame_delay;          
+} t_weapon_animation;
+
 typedef struct s_rays
 {
     float   distance;
@@ -158,6 +168,7 @@ typedef struct s_rays
     int     facing_down;
     int     facing_left;
     int     facing_right;
+
 
 } t_rays;
 
@@ -184,6 +195,7 @@ typedef struct s_mlx
     t_keys      keys;  
     t_rays      rays[NUM_RAYS];
     t_textures  texs;
+    t_weapon_animation weapon;
 } t_mlx;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -283,5 +295,6 @@ void	update_position(t_mlx *mlx, int new_x, int new_y);
 unsigned int get_texture_color(t_texture *texture, int x, int y);
 int init_texture(void *mlx, t_texture *texture, char *path);
 void set_textures(t_map *map, t_mlx *mlx);
+void handle_weapon(t_mlx *mlx);
 
 #endif
