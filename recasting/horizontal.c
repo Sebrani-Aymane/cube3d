@@ -35,7 +35,7 @@ void	calculate_horz_steps(t_rays *ray, t_mlx *mlx, t_horz_params *params)
 		params->x_step = -params->x_step;
 }
 
-void	nitialize_horz_hit(t_mlx *mlx, t_rays *ray, t_horz_params
+void	initialize_horz_hit(t_mlx *mlx, t_rays *ray, t_horz_params
 		*params, float ray_angle)
 {
 	params->ray_angle = ray_angle;

@@ -112,6 +112,15 @@ typedef struct s_textures{
     t_texture west;
 }t_textures;
 
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+	int	left_pressed;
+	int	right_pressed;
+	int	middle_pressed;
+}	t_mouse;
+
 typedef struct s_keys
 {
     int w_pressed;
@@ -184,6 +193,7 @@ typedef struct s_mlx
     t_keys      keys;  
     t_rays      rays[NUM_RAYS];
     t_textures  texs;
+    t_mouse     mouse;
 } t_mlx;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

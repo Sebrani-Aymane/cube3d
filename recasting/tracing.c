@@ -36,7 +36,7 @@ void	map_tracing(t_map *map, t_mlx *mlx)
 	initialize_mlx(mlx);
 	mlx->keys = (t_keys){0, 0, 0, 0, 0, 0};
 	initialize_map_settings(map, mlx);
-	render_frame(mlx);
 	setup_hooks(mlx);
+	render_frame(mlx);
 	mlx_loop(mlx->mlx);
 }

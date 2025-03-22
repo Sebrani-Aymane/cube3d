@@ -58,7 +58,7 @@ int	is_clear_direction(t_mlx *mlx, int new_x, int new_y, double direction)
 	int	check_x;
 	int	check_y;
 
-	look_ahead_distance = 10;
+	look_ahead_distance = 15;
 	check_x = new_x + (int)(cos(mlx->player_angle + direction)
 			* look_ahead_distance);
 	check_y = new_y + (int)(sin(mlx->player_angle + direction)

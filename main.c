@@ -30,6 +30,7 @@ int	main(int ac, char **av)
 	t_mlx	*mlx;
 	t_map	*map;
 
+
 	mlx = NULL;
 	map = NULL;
 	if (ac != 2 || !av[1])
