@@ -21,7 +21,6 @@ void	rotate_player(t_mlx *mlx, int clockwise)
 	mlx->player_angle = fmod(mlx->player_angle, 2 * M_PI);
 	if (mlx->player_angle < 0)
 		mlx->player_angle += 2 * M_PI;
-	// render_frame(mlx);
 }
 
 int	game_loop(t_mlx *mlx)
