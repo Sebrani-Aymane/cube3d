@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 23:13:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/22 02:57:51 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/22 07:06:25 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	draw_wall(t_mlx *mlx, int strip_id)
 		my_mlx_pixel_put(mlx, strip_id, d.y, color);
 		d.y++;
 	}
-	handle_weapon(mlx);
 	
 }
 
@@ -98,4 +97,6 @@ void	cast_rays(t_mlx *mlx)
 		draw_wall(mlx, strip_id);
 		strip_id++;
 	}
+	draw_weapon(mlx);
 }
+

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:55:41 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:54:03 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char **av)
 	t_mlx	*mlx;
 	t_map	*map;
 
+
 	mlx = NULL;
 	map = NULL;
 	if (ac != 2 || !av[1])
@@ -46,6 +47,7 @@ int	main(int ac, char **av)
 	if (!mlx)
 		return (write(2, "Memory allocation failed\n", 24), 0);
 	set_colos(map, mlx);
+	handle_weapon(mlx);
 	set_textures(map, mlx);
 	map_tracing(map, mlx);
 	c_malloc(0, 0);

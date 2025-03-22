@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 02:06:57 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/22 03:29:33 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:57:09 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,15 @@ typedef struct s_textures{
     t_texture west;
 }t_textures;
 
+typedef struct s_mouse
+{
+	int	x;
+	int	y;
+	int	left_pressed;
+	int	right_pressed;
+	int	middle_pressed;
+}	t_mouse;
+
 typedef struct s_keys
 {
     int w_pressed;
@@ -148,7 +157,7 @@ typedef struct s_hit_points {
 
 typedef struct s_weapon_animation {
     t_texture frames[4];      
-    int current_frame;        
+    int current_frame;       
     int frame_counter;        
     int is_attacking;
     struct s_weapon_animation *weapon;         
@@ -196,6 +205,7 @@ typedef struct s_mlx
     t_rays      rays[NUM_RAYS];
     t_textures  texs;
     t_weapon_animation weapon;
+    t_mouse     mouse;
 } t_mlx;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -245,6 +255,7 @@ char *ft_strtrim(char  *s1, char  *set);
 char	*ft_strchr(char *string, int c );
 void	*ft_calloc(int count, int size);
 char *ft_strchrr(char *s, int c);
+void update_weapon_animation(t_weapon_animation *weapon);
 char	*get_next_line(int fd);
 int ft_strlcpy(char *dst, const char *src, int dstsize);
 
@@ -254,6 +265,7 @@ void	map_tracing(t_map *map, t_mlx *mlx);
 void	initialize_mlx(t_mlx *mlx);
 void	initialize_map_settings(t_map *map, t_mlx *mlx);
 void	init_player(t_mlx *mlx, t_map *map);
+void draw_weapon(t_mlx *mlx);
 void	init_player_rays(t_mlx *mlx);
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
