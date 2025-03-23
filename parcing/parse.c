@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/19 05:40:11 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:01:26 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	read_map_configuration(t_map **map, int fd, char **line)
 	while (1)
 	{
 		*line = get_next_line(fd);
-			if (!*line)
-			break;
+		if (!*line)
+			break ;
 		result = process_map_line(*line, map, &counter_clr, &counter_texts);
 		if (result == 1)
 			break ;

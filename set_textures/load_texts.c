@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 19:58:32 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/22 06:36:49 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/23 10:35:20 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void set_textures(t_map *map, t_mlx *mlx)
 	init_texture(mlx,&mlx->texs.east,map->ea_texts);
 	init_texture(mlx,&mlx->texs.south,map->so_texts);
 	init_texture(mlx,&mlx->texs.west,map->we_texts);
-    init_texture(mlx, &mlx->weapon.frames[0] , "texture/03.xpm");
-    init_texture(mlx, &mlx->weapon.frames[1] , "texture/00.xpm");
-    init_texture(mlx, &mlx->weapon.frames[2] , "texture/02.xpm");
-    init_texture(mlx, &mlx->weapon.frames[3] , "texture/00.xpm");
+    init_texture(mlx, &mlx->weapon.frames[0] , "texture/001.xpm");
+    init_texture(mlx, &mlx->weapon.frames[1] , "texture/002.xpm");
+    init_texture(mlx, &mlx->weapon.frames[2] , "texture/003.xpm");
+    init_texture(mlx, &mlx->weapon.frames[3] , "texture/004.xpm");
+    //init_texture(mlx, &mlx->weapon.frames[4] , "texture/000.xpm");
+    
     
 }
