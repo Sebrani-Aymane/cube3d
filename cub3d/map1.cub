@@ -1,12 +1,11 @@
+C 0,0,0
 NO texture/NO.xpm
 SO texture/SO.xpm
-WE /Users/asebrani/Desktop/cube3d/cub3d/texture/816f07617472a381be10518fe9c42f95.xpm
+WE texture/NO2.xpm
 EA texture/kkkkkk.xpm
-F 0,0,0
-C 0,0,0
+F 0,1,255
 
-1111111
-10000111
-101011111111111
-100N01
-111111
+111111111111111111
+1111111111
+111111111E111111
+111111111111111111

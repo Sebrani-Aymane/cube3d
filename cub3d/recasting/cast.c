@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 23:13:52 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/24 14:37:54 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:07:49 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	draw_wall(t_mlx *mlx, int strip_id)
 	d.wall_top = (HEIGHT / 2) - (d.wall_height / 2);
 	d.wall_bottom = (HEIGHT / 2) + (d.wall_height / 2);
 	d.tex_offset = (double)texture->height / d.wall_height;
-	draw_ceiling_and_floor(mlx, strip_id, &d);
 	d.y = d.wall_top;
 	while (d.y < d.wall_bottom)
 	{
@@ -51,6 +50,7 @@ void	draw_wall(t_mlx *mlx, int strip_id)
 		my_mlx_pixel_put(mlx, strip_id, d.y, color);
 		d.y++;
 	}
+	draw_ceiling_and_floor(mlx, strip_id, &d);
 }
 
 void	initialize_ray(t_rays *ray, float ray_angle)

@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = cc
 
-FLAGS =  -fsanitize=address -Wall -Wextra -Werror   -g -Ofast
+FLAGS =  #-fsanitize=address -Wall -Wextra -Werror   -g -Ofast
 
 SRCS = main.c \
 		parcing/parse.c \

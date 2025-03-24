@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 04:22:03 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:20:16 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int	parse_map(char *str, t_map **map)
 	if (read_map_configuration(map, fd, &line))
 		return (1);
 	if (!parse_map_strct(*map, fd, line))
-		return (c_malloc(0, 0), close(fd), 1);
+		return (c_malloc(0, 0), 1);
 	if (!find_player(*map))
 		return (write(2, "Invalid starting pos\n", 21),
-			c_malloc(0, 0), close(fd), 1);
+			c_malloc(0, 0), 1);
 	return (validate_map(*map));
 }

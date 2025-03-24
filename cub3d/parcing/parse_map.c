@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 14:35:18 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 22:14:25 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,11 @@ int	parse_map_strct(t_map *map, int fd, char *line)
 		return (0);
 	}
 	joined_map = collect_map_lines(fd, line);
-	if (!joined_map)
-	{
-		close(fd);
-		return (0);
-	}
-	if (!validate_and_process_map(joined_map, map))
-	{
-		return (0);
-	}
 	close(fd);
+	if (!joined_map)
+		return (0);
+	if (!validate_and_process_map(joined_map, map))
+		return (0);
 	return (1);
 }
 
