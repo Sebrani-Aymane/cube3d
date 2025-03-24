@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 03:17:02 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/23 09:38:52 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:09:10 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ void	render_frame(t_mlx *mlx)
 	place_player(mlx->map, mlx);
 	cast_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
-	
 }
 
 void	map_tracing(t_map *map, t_mlx *mlx)
 {
 	initialize_mlx(mlx);
-	mlx->keys = (t_keys){0, 0, 0, 0, 0, 0};
+	mlx->keys = (t_keys){0, 0, 0, 0, 0, 0, 0};
 	initialize_map_settings(map, mlx);
 	setup_hooks(mlx);
 	render_frame(mlx);

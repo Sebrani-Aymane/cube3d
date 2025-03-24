@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 00:25:22 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:26:33 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	parse_map_strct(t_map *map, int fd, char *line)
 
 	if (!line || !*line || (*line != ' ' && *line != '1' && *line != '\n'))
 	{
-
 		write(2, "Error map!\n", 12);
 		close(fd);
 		return (0);
@@ -99,7 +98,7 @@ int	parse_map_grid(t_map *map)
 
 	i = 0;
 	if (!check_set_chars(map->mp_arrs[0], '1'))
-		return (write(2, "0 is near a space\n", 18), 0);
+		return (write(2, "0/player is near a space\n", 25), 0);
 	while (map->mp_arrs[i])
 	{
 		j = 0;
@@ -110,9 +109,11 @@ int	parse_map_grid(t_map *map)
 					return (0);
 			j++;
 		}
+		if (map->mp_arrs[i][j - 2] != '1' )
+			return (write(2, "invalid borders\n", 16), 0);
 		i++;
 	}
 	if (!check_set_chars(map->mp_arrs[i - 1], '1'))
-		return (write(2, "0 is near a space\n", 18), 0);
+		return (write(2, "0/player is near a space\n", 25), 0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 02:41:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/23 10:13:10 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:12:48 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,31 +58,25 @@ void	update_weapon_animation(t_weapon_animation *weapon)
 void	draw_weapon(t_mlx *mlx)
 {
 	t_texture	*current_texture;
-	int			pos_x;
-	int			pos_y;
-	int			tex_x;
-	int			tex_y;
+	t_coords	pos;
+	t_coords	tex;
 	int			color;
-	int			x;
-	int			y;
 
 	current_texture = &mlx->weapon.frames[mlx->weapon.current_frame];
-	pos_x = (1200 / 2) - (current_texture->width / 2);
-	pos_y = 720 - current_texture->height;
-	y = 0;
-	while (y < current_texture->height)
+	pos.x = (1200 / 2) - (current_texture->width / 2);
+	pos.y = 720 - current_texture->height;
+	tex.y = 0;
+	while (tex.y < current_texture->height)
 	{
-		x = 0;
-		while (x < current_texture->width)
+		tex.x = 0;
+		while (tex.x < current_texture->width)
 		{
-			tex_x = x;
-			tex_y = y;
-			color = get_texture_color(current_texture, tex_x, tex_y);
+			color = get_texture_color(current_texture, tex.x, tex.y);
 			if (color != 0x000000)
-				my_mlx_pixel_put(mlx, pos_x + x, pos_y + y, color);
-			x++;
+				my_mlx_pixel_put(mlx, pos.x + tex.x, pos.y + tex.y, color);
+			tex.x++;
 		}
-		y++;
+		tex.y++;
 	}
 	mlx_clear_window(mlx->mlx, mlx->win);
 }

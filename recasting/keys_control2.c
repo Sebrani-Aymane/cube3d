@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_control2.c                                     :+:      :+:    :+:   */
+/*   keys_control2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-21 01:20:50 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-03-21 01:20:50 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/03/21 01:20:50 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/24 04:08:47 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,20 @@ void	strafe_player(t_mlx *mlx, int right)
 	if (is_valid_position(mlx, mlx->player_x, new_y))
 		mlx->player_y = new_y;
 	render_frame(mlx);
+}
+
+int	mouse_move(int x, int y, t_mlx *mlx)
+{
+	static int	i;
+
+	if (x < 0 || y < 0 || x > WIDTH || y > HEIGHT)
+		return (0);
+	if (x > i)
+		mlx->player_angle += mlx->rotation_speed;
+	else if (x < i)
+		mlx->player_angle -= mlx->rotation_speed;
+	i = x;
+	if (mlx->player_angle < 0)
+		mlx->player_angle += 2 * M_PI;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 02:06:57 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/24 00:30:48 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:27:55 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,12 @@ typedef struct s_player
 	float	angle;
 }	t_player;
 
+typedef struct s_coords
+{
+	int	x;
+	int	y;
+}	t_coords;
+
 typedef struct s_draw_data
 {
 	int		wall_top;
@@ -237,17 +243,20 @@ int				parse_map_name(char *av);
 int				parse_map(char *av, t_map **map);
 int				get_types_infos(char *line);
 t_map			*map_init(void);
-int is_safe_to_parse(char *str);
+int				is_safe_to_parse(char *str);
 t_map			*check_texts(char *line, t_map *map);
-int 			more_parsing(char*str);
+int				more_parsing(char *str);
 int				check_texture_completeness(t_map *map);
 int				is_valid_file(char *path);
 int				is_duplicate_direction(char *direction, t_map *map);
-int				parse_color_line(char *line, t_map *map,int *clr_counter);
+int				parse_color_line(char *line, t_map *map, int *clr_counter);
 int				parse_map_strct(t_map *map, int fd, char *line);
 int				find_player(t_map *map);
 int				validate_map(t_map *map);
+int				read_map_configuration(t_map **map, int fd, char **line);
 int				parse_map_grid(t_map *map);
+int				process_map_line(char *line, t_map **map,
+					int *counter_clr, int *counter_texts);
 void			create_new_map(t_map **map);
 char			**ft_splitt(char *s, char c);
 int				check_set_chars(char *str, char c);
@@ -295,6 +304,7 @@ int				key_release(int keycode, t_mlx *mlx);
 int				game_loop(t_mlx *mlx);
 void			rotate_player(t_mlx *mlx, int clockwise);
 void			strafe_player(t_mlx *mlx, int right);
+int				mouse_move(int x, int y, t_mlx *mlx);
 void			move_player(t_mlx *mlx, int forward);
 int				is_valid_position(t_mlx *mlx, int new_x, int new_y);
 void			update_position(t_mlx *mlx, int new_x, int new_y);

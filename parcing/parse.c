@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:23:52 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 00:32:57 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:22:03 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,32 @@ int	handle_map_file_open(char *str, t_map **map, int *fd)
 	return (0);
 }
 
-int	process_map_line(char *line, t_map **map,
-	int *counter_clr, int *counter_texts)
+int	handle_textures(char *after, t_map **map, int *counter_texts)
+{
+	*map = check_texts(after, *map);
+	if (!*map)
+		return (0);
+	(*counter_texts)++;
+	return (1);
+}
+
+int	handle_colors(char *after, t_map **map, int *counter_clr)
+{
+	int	res;
+
+	res = parse_color_line(after, *map, counter_clr);
+	if (res)
+		(*counter_clr)++;
+	else if (res == 0)
+		return (0);
+	return (1);
+}
+
+int	process_map_line(char *line, t_map **map, int *counter_clr,
+					int *counter_texts)
 {
 	char	*after;
-	int res = 5;
+
 	after = ft_strtrim(line, " \t");
 	if (!after || *after == '\n')
 		return (0);
@@ -36,45 +57,12 @@ int	process_map_line(char *line, t_map **map,
 		|| (*counter_clr == 2 && *counter_texts == 4))
 		return (1);
 	if (get_texts_infos(after))
-	{
-		*map = check_texts(after, *map);
-		if (!*map)
+		if (!handle_textures(after, map, counter_texts))
 			return (2);
-		(*counter_texts)++;
-	}
-	if ((*counter_texts == 4 || *counter_texts == 0) && *after == 'F' || *after == 'C')
-	{
-		res = parse_color_line(after, *map,counter_clr);
-		if (res)
-			(*counter_clr)++;
-		else if (res == 0)
+	if ((*counter_texts == 4 || *counter_texts == 0)
+		&& (*after == 'F' || *after == 'C'))
+		if (!handle_colors(after, map, counter_clr))
 			return (2);
-	}
-	return (0);
-}
-
-int	read_map_configuration(t_map **map, int fd, char **line)
-{
-	int		counter_clr;
-	int		counter_texts;
-	int		result;
-
-	counter_clr = 0;
-	counter_texts = 0;
-	int counter =0;
-	while (1)
-	{
-		*line = get_next_line(fd);
-		if (!*line || is_safe_to_parse(*line))
-			break ;
-		result = process_map_line(*line, map, &counter_clr, &counter_texts);
-		if (result == 1)
-			break ;
-		else if (result == 2)
-			return (c_malloc(0, 0), close(fd), 1);
-	}
-	if (!check_texture_completeness(*map))
-		return (c_malloc(0, 0), close(fd), 1);
 	return (0);
 }
 

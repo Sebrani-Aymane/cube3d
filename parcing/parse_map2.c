@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:54:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:34:41 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:26:33 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int	validate_map(t_map *map)
 	int		j;
 	char	curr;
 
-	i = 0;
-	while (map->mp_arrs[i])
+	i = -1;
+	while (map->mp_arrs[++i])
 	{
-		j = 0;
-		while (map->mp_arrs[i][j])
+		j = -1;
+		while (map->mp_arrs[i][++j])
 		{
 			curr = map->mp_arrs[i][j];
 			if (curr != '0' && curr != '\n'
@@ -55,13 +55,13 @@ int	validate_map(t_map *map)
 			{
 				if (curr != 'E' && curr != 'W' && curr != 'S' && curr != 'N')
 					return (write(2, "invalid char in map\n", 20), 1);
+				if (!check_for_surrounds(i, j, map->mp_arrs))
+					return (write(2, "Player is near a space\n", 23), 1);
 				map->x_player_pos = j;
 				map->y_player_pos = i;
 				map->start_direction = curr;
 			}
-			j++;
 		}
-		i++;
 	}
 	return (0);
 }
@@ -90,14 +90,14 @@ int	check_for_surrounds(int i, int j, char **map)
 	if (j > 0 && j + 1 < row_len)
 	{
 		if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-			return (write(2, "0 is near a space\n", 18), 0);
+			return (write(2, "0/player is near a space\n", 18), 0);
 	}
 	if (i > 0 && i + 1 < map_rows)
 	{
 		if (j < ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
-			return (write(2, "0 is near a space\n", 18), 0);
+			return (write(2, "0/player is near a space\n", 25), 0);
 		if (j < ft_strlen(map[i + 1]) && map[i + 1][j] == ' ')
-			return (write(2, "0 is near a space\n", 18), 0);
+			return (write(2, "0/player is near a space\n", 25), 0);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 05:22:35 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/19 05:19:04 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:04:06 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	**prepare_new_map(char **map, int rows, int max_len)
 	int		i;
 	int		j;
 
+	(void) map;
 	new_map = c_malloc((rows + 1) * sizeof(char *), 1);
 	if (!new_map)
 		return (NULL);

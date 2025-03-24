@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 00:34:07 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 04:19:41 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,38 @@ int	is_valid_file(char *path)
 	return (0);
 }
 
-int is_safe_to_parse(char *str)
+int	is_safe_to_parse(char *str)
 {
-	int i=0;
-	if (str[i]== 'N' || str[i]=='E' || str[i]=='W' || str[i]=='S'
-		|| str[i] =='F' || str[i]=='C' || str[i] == '\n')
-			return(0);
+	int	i;
+
+	i = 0;
+	if (str[i] == 'N' || str[i] == 'E' || str[i] == 'W' || str[i] == 'S'
+		|| str[i] == 'F' || str[i] == 'C' || str[i] == '\n')
+		return (0);
 	else
-		return(1);
+		return (1);
+}
+
+int	read_map_configuration(t_map **map, int fd, char **line)
+{
+	int		counter_clr;
+	int		counter_texts;
+	int		result;
+
+	counter_clr = 0;
+	counter_texts = 0;
+	while (1)
+	{
+		*line = get_next_line(fd);
+		if (!*line || is_safe_to_parse(*line))
+			break ;
+		result = process_map_line(*line, map, &counter_clr, &counter_texts);
+		if (result == 1)
+			break ;
+		else if (result == 2)
+			return (c_malloc(0, 0), close(fd), 1);
+	}
+	if (!check_texture_completeness(*map))
+		return (c_malloc(0, 0), close(fd), 1);
+	return (0);
 }
