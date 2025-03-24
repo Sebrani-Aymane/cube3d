@@ -2,10 +2,11 @@ NO texture/NO.xpm
 SO texture/SO.xpm
 WE texture/WE.xpm
 EA texture/EA.xpm
+F 255,0,0
+C 0,0,255
 
-
-F 20,20,20
-C 200,200,200
-
-111
-111
+111111
+100001
+1000N1
+100001
+111111

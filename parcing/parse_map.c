@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 04:26:33 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 07:27:02 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	parse_map_strct(t_map *map, int fd, char *line)
 	}
 	if (!validate_and_process_map(joined_map, map))
 	{
-		close(fd);
 		return (0);
 	}
+	close(fd);
 	return (1);
 }
 
@@ -95,6 +95,7 @@ int	parse_map_grid(t_map *map)
 {
 	int	i;
 	int	j;
+	char *line;
 
 	i = 0;
 	if (!check_set_chars(map->mp_arrs[0], '1'))
@@ -102,14 +103,20 @@ int	parse_map_grid(t_map *map)
 	while (map->mp_arrs[i])
 	{
 		j = 0;
-		while (map->mp_arrs[i][j])
+		line = ft_strtrim(map->mp_arrs[i]," \n\t");
+		if (map->mp_arrs[i][0]!= '1')
 		{
-			if (map->mp_arrs[i][j] == '0')
+			puts("here");
+			return (write(2, "0/player is near a space\n", 25), 0);
+		}while (map->mp_arrs[i][j])
+		{
+			if (map->mp_arrs[i][j] == '0'
+				|| (i == map->x_player_pos && j == map->y_player_pos))
 				if (!check_for_surrounds(i, j, map->mp_arrs))
 					return (0);
 			j++;
 		}
-		if (map->mp_arrs[i][j - 2] != '1' )
+		if (map->mp_arrs[i][j - 1] != '1')
 			return (write(2, "invalid borders\n", 16), 0);
 		i++;
 	}

@@ -1,7 +1,8 @@
-NO /Users/kaafkhar/Desktop/cub3D/cub3D/parse_map2.c
-SO /Users/kaafkhar/Desktop/cub3D/cub3D/parse_2.c
-WE /Users/kaafkhar/Desktop/cub3D/cub3D/map_init.c
-EA /Users/kaafkhar/Desktop/cub3D/cub3D/check_data.c
+NO texture/NO.xpm
+SO texture/SO.xpm
+WE texture/WE.xpm
+EA texture/EA.xpm
+
 
 F 220,255,0
 C 225,30,0

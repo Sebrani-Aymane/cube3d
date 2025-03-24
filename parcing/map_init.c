@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/23 21:50:47 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 07:03:23 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_texture_completeness(t_map *map)
 		&& map->ceiling_clr[1] != -1
 		&& map->ceiling_clr[2] != -1)
 		color_count++;
-	if (direction_count != 4)
+	if (direction_count != 4 || color_count != 2 )
 		return (write(2,
 				"Error: Missing or incomplete texture directions\n", 47), 0);
 	return (1);

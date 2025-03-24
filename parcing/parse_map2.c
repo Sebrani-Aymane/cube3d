@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 04:54:51 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 04:26:33 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 06:57:06 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,18 @@ int	check_for_surrounds(int i, int j, char **map)
 	row_len = ft_strlen(map[i]);
 	if (j > 0 && j + 1 < row_len)
 	{
-		if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ')
-			return (write(2, "0/player is near a space\n", 18), 0);
+		if (map[i][j - 1] == ' ' || map[i][j + 1] == ' '
+			|| (!map[i][j - 1] || !map[i][j + 1]))
+			return (write(2, "Error: player is near a space\n", 30), 0);
 	}
 	if (i > 0 && i + 1 < map_rows)
 	{
-		if (j < ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
-			return (write(2, "0/player is near a space\n", 25), 0);
-		if (j < ft_strlen(map[i + 1]) && map[i + 1][j] == ' ')
-			return (write(2, "0/player is near a space\n", 25), 0);
+		if (j >= ft_strlen(map[i - 1])
+			|| (map[i - 1][j] && map[i - 1][j] == ' '))
+			return (write(2, "Error: player is near a space\n", 30), 0);
+		if (j >= ft_strlen(map[i + 1])
+			|| (map[i + 1][j] && map[i + 1][j] == ' '))
+			return (write(2, "Error: player is near a space\n", 30), 0);
 	}
 	return (1);
 }

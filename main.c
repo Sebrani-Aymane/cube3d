@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/24 03:50:44 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 06:33:58 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int ac, char **av)
 		return (write(2, "invalid map name\n", 18), 0);
 	if (0 != parse_map(av[1], &map))
 		return (0);
-	create_new_map(&map);
 	if (!parse_map_grid(map))
 		return (0);
+	create_new_map(&map);
 	map ->mp_arrs = replace_spaces_with_one(map->mp_arrs);
 	mlx = c_malloc(sizeof(t_mlx), 1);
 	if (!mlx)

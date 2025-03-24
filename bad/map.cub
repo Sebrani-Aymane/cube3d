@@ -1,12 +1,13 @@
-NO /Users/asebrani/Downloads/NO.xpm
-SO /Users/asebrani/Downloads/SO.xpm
-WE /Users/asebrani/Downloads/WE.xpm
-EA /Users/asebrani/Downloads/EA.xpm
+NO texture/NO.xpm
+SO texture/SO.xpm
+WE texture/WE.xpm
+EA texture/EA.xpm
+
 
 F 0,255,0
 C 255,200,0
 
 11111111111111111111
 1000000000000S1111111111111
-100000000111 
+100000000111111
 111111111111111111111111111
