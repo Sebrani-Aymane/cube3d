@@ -1,6 +1,8 @@
+NAME = cub3D
+
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror   -fsanitize=address -g -Ofast
+FLAGS = # -fsanitize=address #-Wall -Wextra -Werror   -g -Ofast
 
 SRCS = main.c \
 		parcing/parse.c \
@@ -35,7 +37,6 @@ SRCS = main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = cub3D
 
 all: $(NAME)
 
@@ -46,7 +47,7 @@ GLFW_LIB = libglfw3.a
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o: %.c ../cub3D.h 
+%.o : %.c ./cub3D.h
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:

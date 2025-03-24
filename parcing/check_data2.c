@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_data2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaafkhar <kaafkhar@student.42.fr>          #+#  +:+       +#+        */
+/*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-03-18 20:05:46 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025-03-18 20:05:46 by kaafkhar         ###   ########.fr       */
+/*   Created: 2025/03/18 20:05:46 by kaafkhar          #+#    #+#             */
+/*   Updated: 2025/03/23 23:02:08 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-int	validate_color_line(char *trimmed)
+int	validate_color_line(char *trimmed,int *clr_counter)
 {
-	if (!trimmed)
-		return (0);
-	if (trimmed[0] != 'F' && trimmed[0] != 'C')
-		return (0);
+
+	if ((trimmed[0] != 'F' || trimmed[0] != 'C') && *clr_counter >= 2)
+		return (write(2,
+				"Error: Missing or incomplete color configurations\n", 49), 0);
 	return (1);
 }
 
@@ -35,6 +35,8 @@ int	parse_color_components(char **rgb_parts, int *r, int *g, int *b)
 	part_count = 0;
 	while (rgb_parts[part_count])
 	{
+		if (!rgb_parts[part_count])
+			return (0);
 		part_count++;
 	}
 	if (part_count != 3)
@@ -57,7 +59,7 @@ int	validate_color_range(int r, int g, int b)
 	return (!(r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255));
 }
 
-int	parse_color_line(char *line, t_map *map)
+int	parse_color_line(char *line, t_map *map,int *clr_counter)
 {
 	char	*trimmed;
 	char	*color_start;
@@ -67,7 +69,9 @@ int	parse_color_line(char *line, t_map *map)
 	color.g = -1;
 	color.b = -1;
 	trimmed = ft_strtrim(line, " \n\t");
-	if (!validate_color_line(trimmed))
+	if (!trimmed)
+		return(0);
+	if (!validate_color_line(trimmed,clr_counter))
 	{
 		c_malloc(0, 0);
 		return (0);

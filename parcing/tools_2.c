@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 19:02:19 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/11 02:35:17 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:13:48 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	extract_rgb_values(char *color_start, t_color *color)
 {
 	char	**rgb_parts;
 
+	if (!more_parsing(color_start))
+		return (0);
 	rgb_parts = ft_splitt(color_start, ',');
 	if (!rgb_parts)
 	{

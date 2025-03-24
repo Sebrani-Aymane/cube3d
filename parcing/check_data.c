@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 04:19:56 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/19 05:14:43 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:34:07 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_only_digits(char *str)
 	}
 	while (str[i] != '\0')
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if ((str[i] < '0' || str[i] > '9') && str[i] != ',')
 			return (0);
 		i++;
 	}
@@ -67,4 +67,14 @@ int	is_valid_file(char *path)
 	if (access(str, F_OK | R_OK) == 0)
 		return (1);
 	return (0);
+}
+
+int is_safe_to_parse(char *str)
+{
+	int i=0;
+	if (str[i]== 'N' || str[i]=='E' || str[i]=='W' || str[i]=='S'
+		|| str[i] =='F' || str[i]=='C' || str[i] == '\n')
+			return(0);
+	else
+		return(1);
 }

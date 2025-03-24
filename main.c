@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 11:20:43 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/22 06:54:03 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/23 23:31:49 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	set_colos(t_map *map, t_mlx *mlx)
 		| map->ceiling_clr[1] << 8 | map->ceiling_clr[2];
 }
 
-// void f() {
-// 	system("leaks cub3D");
-// }
-	// atexit(f);
+void f() {
+	system("lsof -c cub3D; leaks cub3D | grep leaked");
+}
 
 int	main(int ac, char **av)
 {
 	t_mlx	*mlx;
 	t_map	*map;
+	atexit(f);
 
 
 	mlx = NULL;

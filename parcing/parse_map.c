@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:09:31 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/19 05:45:38 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:25:22 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ int	parse_map_strct(t_map *map, int fd, char *line)
 {
 	char	*joined_map;
 
-	if (!line || !*line)
+	if (!line || !*line || (*line != ' ' && *line != '1' && *line != '\n'))
 	{
+
 		write(2, "Error map!\n", 12);
 		close(fd);
 		return (0);

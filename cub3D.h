@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 02:06:57 by kaafkhar          #+#    #+#             */
-/*   Updated: 2025/03/23 10:35:26 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/24 00:30:48 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,11 +237,13 @@ int				parse_map_name(char *av);
 int				parse_map(char *av, t_map **map);
 int				get_types_infos(char *line);
 t_map			*map_init(void);
+int is_safe_to_parse(char *str);
 t_map			*check_texts(char *line, t_map *map);
+int 			more_parsing(char*str);
 int				check_texture_completeness(t_map *map);
 int				is_valid_file(char *path);
 int				is_duplicate_direction(char *direction, t_map *map);
-int				parse_color_line(char *line, t_map *map);
+int				parse_color_line(char *line, t_map *map,int *clr_counter);
 int				parse_map_strct(t_map *map, int fd, char *line);
 int				find_player(t_map *map);
 int				validate_map(t_map *map);

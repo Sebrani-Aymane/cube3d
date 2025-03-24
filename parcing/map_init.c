@@ -6,7 +6,7 @@
 /*   By: asebrani <asebrani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:54:45 by asebrani          #+#    #+#             */
-/*   Updated: 2025/03/19 05:28:06 by asebrani         ###   ########.fr       */
+/*   Updated: 2025/03/23 21:50:47 by asebrani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ int	check_texture_completeness(t_map *map)
 	if (direction_count != 4)
 		return (write(2,
 				"Error: Missing or incomplete texture directions\n", 47), 0);
-	if (color_count != 2)
-		return (write(2,
-				"Error: Missing or incomplete color configurations\n", 49), 0);
 	return (1);
 }
 
