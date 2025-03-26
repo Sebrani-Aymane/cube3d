@@ -45,5 +45,5 @@ int	main(int ac, char **av)
 	set_textures(map, mlx);
 	map_tracing(map, mlx);
 	c_malloc(0, 0);
-	return (printf("all good\n"), 1);
+	return (1);
 }
